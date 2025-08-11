@@ -1,0 +1,126 @@
+export interface Product {
+  id: number
+  name: string
+  price: number
+  oldPrice: number
+  image: string
+  images: string[]
+  category: string // Changed from "fille" | "garcon" to string
+  description?: string
+}
+
+export const mockProducts: Product[] = [
+  // Aventure - Adventure Stories
+  {
+    id: 1,
+    name: "La Princesse et le Dragon Magique",
+    price: 120,
+    oldPrice: 150,
+    image: "/p1.avif",
+    images: [
+      "/p1.avif",
+      "/p1.avif",
+      "/p1.avif",
+    ],
+    category: "aventure",
+    description:
+      "Une histoire magique personnalisée où votre petite princesse vit une aventure extraordinaire avec un dragon bienveillant.",
+  },
+  {
+    id: 2,
+    name: "L'Aventure de la Fée des Étoiles",
+    price: 95,
+    oldPrice: 120,
+    image: "/p1.avif",
+    images: [
+      "/p1.avif",
+      "/p1.avif",
+    ],
+    category: "aventure",
+    description: "Votre enfant devient l'héroïne d'une aventure féerique parmi les étoiles.",
+  },
+  {
+    id: 3,
+    name: "Le Royaume des Licornes",
+    price: 80,
+    oldPrice: 100,
+    image: "/p1.avif",
+    images: [
+      "/p1.avif",
+      "/p1.avif",
+    ],
+    category: "sommeil",
+    description: "Une histoire enchantée dans un royaume peuplé de licornes magiques.",
+  },
+  {
+    id: 4,
+    name: "La Ballerine et le Château Enchanté",
+    price: 110,
+    oldPrice: 140,
+    image: "/p1.avif",
+    images: [
+      "/p1.avif",
+      "/p1.avif",
+    ],
+    category: "sommeil",
+    description: "Votre petite danseuse découvre un château magique rempli de surprises.",
+  },
+
+  // More Adventure Stories
+  {
+    id: 5,
+    name: "Le Pirate et le Trésor Perdu",
+    price: 130,
+    oldPrice: 160,
+    image: "/p1.avif",
+    images: [
+      "/p1.avif",
+      "/p1.avif",
+    ],
+    category: "aventure",
+    description: "Une aventure palpitante où votre petit pirate part à la recherche d'un trésor légendaire.",
+  },
+  {
+    id: 6,
+    name: "L'Explorateur de la Jungle",
+    price: 115,
+    oldPrice: 145,
+    image: "/p1.avif",
+    images: [
+      "/p1.avif",
+      "/p1.avif",
+    ],
+    category: "aventure",
+    description: "Votre enfant devient un courageux explorateur dans une jungle mystérieuse.",
+  },
+  {
+    id: 7,
+    name: "Le Chevalier et le Dragon",
+    price: 125,
+    oldPrice: 155,
+    image: "/p1.avif",
+    images: [
+      "/p1.avif",
+      "/p1.avif",
+    ],
+    category: "aventure",
+    description: "Une épopée héroïque où votre petit chevalier affronte un dragon pour sauver le royaume.",
+  },
+  {
+    id: 8,
+    name: "L'Astronaute et la Planète Mystérieuse",
+    price: 140,
+    oldPrice: 170,
+    image: "/p1.avif",
+    images: [
+      "/p1.avif",
+      "/p1.avif",
+    ],
+    category: "sommeil",
+    description: "Une aventure spatiale extraordinaire sur une planète pleine de mystères.",
+  },
+]
+
+export function getProductById(id: number): Product | undefined {
+  return mockProducts.find((product) => product.id === id)
+}
