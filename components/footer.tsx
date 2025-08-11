@@ -63,7 +63,7 @@ export default function Footer() {
               </div>
               <div className="flex space-x-3 mt-4">
                 <a
-                  href="https://web.facebook.com/profile.php?id=61575855392477"
+                  href="https://www.facebook.com/profile.php?id=61568595925651"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors"
@@ -72,7 +72,7 @@ export default function Footer() {
                   <Facebook size={16} className="text-white" />
                 </a>
                 <a
-                  href="https://www.instagram.com/kidsstorytime"
+                  href="https://www.instagram.com/kids_storytime_24/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors"
