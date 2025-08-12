@@ -54,11 +54,7 @@ export default function StoryCategoriesSection() {
             {/* Histoires Uniques */}
             <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-400 to-purple-600 text-white">
               <div className="absolute inset-0">
-                <img
-                  src="/section.avif"
-                  alt="Histoires Uniques"
-                  className="w-full h-full object-cover opacity-80"
-                />
+                <img src="/section.avif" alt="Histoires Uniques" className="w-full h-full object-cover opacity-80" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               </div>
               <div className="relative z-10 p-8 h-96 flex flex-col justify-end">
@@ -94,30 +90,25 @@ export default function StoryCategoriesSection() {
             </div>
           </motion.div>
 
-          <div className="bg-[#007d64] rounded-2xl">
-            <motion.div variants={itemVariants} className="grid lg:grid-cols-2 gap-12 items-center h-fit md:h-[400px]">
+          {/* Updated bottom section */}
+          <div className="bg-[#007d64] rounded-2xl overflow-hidden">
+            <motion.div variants={itemVariants} className="grid lg:grid-cols-2 gap-0 items-stretch min-h-[400px]">
               {/* Left column - Image */}
-              <div className="relative overflow-hidden rounded-2xl h-full flex items-center justify-center">
-                <img
-                  src="/section.avif"
-                  alt="Famille avec livre personnalisé"
-                  className="w-full h-full object-cover"
-                />
+              <div className="relative overflow-hidden h-full min-h-[300px] lg:min-h-[400px]">
+                <img src="/section.avif" alt="Famille avec livre personnalisé" className="w-full h-full object-cover" />
               </div>
 
-              {/* Right column - Text, no background, left aligned */}
-              <div className="rounded-2xl p-8 lg:p-12 text-white flex flex-col justify-center">
-                <div className="text-left">
-                  <h3 className="text-3xl font-bold mb-6">Nos Catégories d'Histoires</h3>
-                  <p className="mb-8 text-lg leading-relaxed">
-                    Histoires de Fêtes et Traditions pour célébrer les moments sacrés et transmettre leurs belles valeurs.
-                    Contes magiques et aventures des histoires fantastiques où l'imagination n'a pas de limite. Moments de
-                    vie en famille des histoires douces pour accompagner les grands moments de la vie.
-                  </p>
-                  <button className="px-8 py-4 bg-white/20 text-white font-semibold rounded-full hover:bg-white/30 transition-all duration-300 text-lg self-start">
-                    Explorez les histoires
-                  </button>
-                </div>
+              {/* Right column - Text content */}
+              <div className="p-8 text-white flex flex-col justify-center">
+                <h3 className="text-3xl font-bold mb-6">Nos Catégories d'Histoires</h3>
+                <p className="mb-8 text-lg leading-relaxed">
+                  Histoires de Fêtes et Traditions pour célébrer les moments sacrés et transmettre leurs belles valeurs.
+                  Contes magiques et aventures des histoires fantastiques où l'imagination n'a pas de limite. Moments de
+                  vie en famille des histoires douces pour accompagner les grands moments de la vie.
+                </p>
+                <button className="px-8 py-4 bg-white/20 text-white font-semibold rounded-full hover:bg-white/30 transition-all duration-300 text-lg self-start">
+                  Explorez les histoires
+                </button>
               </div>
             </motion.div>
           </div>

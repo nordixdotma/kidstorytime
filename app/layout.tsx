@@ -1,14 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Poppins } from "next/font/google"
 import "./globals.css"
 import { CartProvider } from "@/lib/cart-context"
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  variable: "--font-poppins",
-})
 
 export const metadata: Metadata = {
   title: "Kids Story Time | Histoires Personnalisées pour Enfants",
@@ -25,10 +18,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" className={poppins.variable} translate="no">
+    <html lang="fr" translate="no">
       <head>
         <meta name="google" content="notranslate" />
         <link rel="icon" href="/favicon.png" sizes="any" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body className="font-sans antialiased">
         <CartProvider>{children}</CartProvider>

@@ -107,12 +107,12 @@ export default function Header({ forceWhite = false }: HeaderProps) {
     visible: {
       height: "auto",
       opacity: 1,
-      transition: { duration: 0.3, ease: "easeInOut" as const },
+      transition: { duration: 0.5, ease: "easeInOut" as const },
     },
     hidden: {
       height: 0,
       opacity: 0,
-      transition: { duration: 0.3, ease: "easeInOut" as const },
+      transition: { duration: 0.5, ease: "easeInOut" as const },
     },
   }
 
@@ -123,6 +123,8 @@ export default function Header({ forceWhite = false }: HeaderProps) {
     { name: "Contact", href: "/contact" },
   ]
 
+  const bannerText = "Livraison Gratuite au Maroc dans 24H/48H.🔥"
+
   return (
     <>
       <header ref={headerRef} className="fixed top-0 left-0 right-0 z-40">
@@ -132,12 +134,28 @@ export default function Header({ forceWhite = false }: HeaderProps) {
           animate={showBanner ? "visible" : "hidden"}
           className="bg-black text-white overflow-hidden"
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="py-2 text-center">
-              <p className="text-sm font-medium">
-                Livraison Gratuite au Maroc dans 24H/48H.🔥
-              </p>
-            </div>
+          <div className="relative h-8 flex items-center">
+            <motion.div
+              className="flex whitespace-nowrap"
+              animate={{
+                x: [0, -1000],
+              }}
+              transition={{
+                x: {
+                  repeat: Number.POSITIVE_INFINITY,
+                  repeatType: "loop",
+                  duration: 15,
+                  ease: "linear",
+                },
+              }}
+            >
+              {/* Create enough repetitions to ensure seamless loop */}
+              {Array.from({ length: 10 }).map((_, index) => (
+                <div key={index} className="flex items-center px-8">
+                  <span className="text-sm font-medium">{bannerText}</span>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </motion.div>
 
@@ -145,7 +163,7 @@ export default function Header({ forceWhite = false }: HeaderProps) {
         <div
           className={cn(
             "transition-all duration-300 ease-in-out",
-            isScrolled ? "bg-white/95 backdrop-blur-md shadow-md py-3" : "bg-transparent py-5 md:py-6",
+            isScrolled ? "bg-white backdrop-blur-md shadow-sm py-2" : "bg-transparent py-5 md:py-6",
           )}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

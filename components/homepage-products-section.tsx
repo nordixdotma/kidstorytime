@@ -5,7 +5,6 @@ import { useInView } from "react-intersection-observer"
 import { motion } from "framer-motion"
 import ProductCard from "./product-card"
 import { mockProducts } from "@/lib/mock-products"
-import Link from "next/link"
 import { ChevronDown } from "lucide-react"
 
 export default function HomepageProductsSection() {
@@ -15,7 +14,6 @@ export default function HomepageProductsSection() {
   })
 
   const [sortBy, setSortBy] = useState("default")
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   // Apply sorting to products
   const sortedProducts = useMemo(() => {
@@ -39,7 +37,7 @@ export default function HomepageProductsSection() {
         break
     }
 
-    return products.slice(0, 8) // Show first 8 products
+    return products // Show all products
   }, [sortBy])
 
   const containerVariants = {
@@ -62,51 +60,36 @@ export default function HomepageProductsSection() {
   }
 
   const sortOptions = [
-    { value: "default", label: "Trier par défaut" },
+    { value: "default", label: "Défaut" },
     { value: "price-low", label: "Prix: du plus bas au plus haut" },
     { value: "price-high", label: "Prix: du plus haut au plus bas" },
     { value: "name", label: "Nom: A-Z" },
     { value: "newest", label: "Plus récent" },
   ]
 
-  const selectedOption = sortOptions.find((option) => option.value === sortBy)
-
   return (
     <section className="py-12 sm:py-16 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Price Filter */}
+        {/* Improved Sort Filter */}
         <div className="flex justify-end mb-8">
-          <div className="relative">
-            <button
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="flex items-center justify-between min-w-[200px] bg-white border-2 border-gray-200 hover:border-[#d88200] focus:border-[#d88200] focus:outline-none px-4 py-3 text-gray-700 font-medium transition-all duration-200 shadow-sm hover:shadow-md"
-            >
-              <span className="text-sm">{selectedOption?.label}</span>
-              <ChevronDown
-                className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${
-                  isDropdownOpen ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-
-            {isDropdownOpen && (
-              <div className="absolute right-0 top-full mt-1 w-full bg-white border border-gray-200 shadow-lg z-10">
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-gray-600 font-medium">Trier par:</span>
+            <div className="relative">
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="appearance-none bg-white border border-gray-200 rounded-lg px-4 py-2 pr-10 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#d88200] focus:border-[#d88200] cursor-pointer font-medium hover:border-[#d88200] transition-colors shadow-sm min-w-[200px]"
+              >
                 {sortOptions.map((option) => (
-                  <button
-                    key={option.value}
-                    onClick={() => {
-                      setSortBy(option.value)
-                      setIsDropdownOpen(false)
-                    }}
-                    className={`w-full text-left px-4 py-3 text-sm hover:bg-gray-50 transition-colors duration-150 ${
-                      sortBy === option.value ? "bg-[#d88200]/10 text-[#d88200] font-medium" : "text-gray-700"
-                    }`}
-                  >
+                  <option key={option.value} value={option.value} className="bg-white text-gray-700 py-2">
                     {option.label}
-                  </button>
+                  </option>
                 ))}
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                <ChevronDown className="w-4 h-4 text-gray-400" />
               </div>
-            )}
+            </div>
           </div>
         </div>
 
@@ -124,20 +107,7 @@ export default function HomepageProductsSection() {
             </motion.div>
           ))}
         </motion.div>
-
-        {/* View All Button */}
-        <div className="text-center">
-          <Link
-            href="/boutique"
-            className="inline-block bg-[#d88200] hover:bg-[#c07600] text-white font-black px-8 py-3 text-lg transition-colors duration-300"
-          >
-            Voir Tous
-          </Link>
-        </div>
       </div>
-
-      {/* Click outside to close dropdown */}
-      {isDropdownOpen && <div className="fixed inset-0 z-5" onClick={() => setIsDropdownOpen(false)} />}
     </section>
   )
 }

@@ -5,11 +5,8 @@
 :root {
   --font-inter: "Inter", sans-serif;
   --font-poppins: "Poppins", sans-serif;
+  --font-open-sans: "Open Sans", sans-serif; /* Updated font value */
   --primary: 25 100% 42%; /* Updated primary color value */
-}
-
-* {
-  border-radius: 0 !important;
 }
 
 html {
@@ -17,7 +14,7 @@ html {
 }
 
 body {
-  font-family: var(--font-poppins);
+  font-family: var(--font-open-sans); /* Updated font reference */
 }
 
 /* Mobile viewport height fix */
@@ -27,13 +24,8 @@ body {
   }
 }
 
-/* Ensure no border radius anywhere except WhatsApp button and cart counter */
-.rounded-none,
-.rounded-full:not(.whatsapp-button):not(.whatsapp-button *):not(.cart-counter),
-.rounded,
-.rounded-md,
-.rounded-lg,
-.rounded-xl {
+/* Only remove border radius from specific elements that should be square */
+.no-radius {
   border-radius: 0 !important;
 }
 
@@ -144,5 +136,6 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-open-sans); /* Updated font reference */
   }
 }
