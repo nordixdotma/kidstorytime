@@ -48,6 +48,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     setSelectedImage(index)
   }
 
+  const dedicationOptions = [
+    { value: "1", label: "Dédicace 1" },
+    { value: "2", label: "Dédicace 2" },
+    { value: "3", label: "Dédicace 3" },
+    { value: "4", label: "Dédicace 4" },
+    { value: "5", label: "Dédicace 5" },
+  ]
+
   const getSelectedDedicText = () => {
     const displayName = childName || "[Prénom de l'enfant]"
 
@@ -75,7 +83,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
     localStorage.setItem("product-preview", JSON.stringify(productInfo))
 
-    // Navigate to preview page (will be created later)
+    // Navigate to preview page
     window.location.href = `/apercu/${product.id}`
   }
 
@@ -250,20 +258,24 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               />
             </div>
 
-            {/* Dedication Dropdown */}
+            {/* Dedication Selection - Checkbox Style */}
             <div>
               <h3 className="text-lg font-black text-[#d88200] mb-3">Dédicace personnalisée</h3>
-              <select
-                value={selectedDedication}
-                onChange={(e) => setSelectedDedication(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#d88200] focus:border-[#d88200] font-normal mb-3"
-              >
-                <option value="1">Dédicace 1</option>
-                <option value="2">Dédicace 2</option>
-                <option value="3">Dédicace 3</option>
-                <option value="4">Dédicace 4</option>
-                <option value="5">Dédicace 5</option>
-              </select>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
+                {dedicationOptions.map((option) => (
+                  <div
+                    key={option.value}
+                    onClick={() => setSelectedDedication(option.value)}
+                    className={`cursor-pointer px-3 py-2 border-2 rounded-md transition-all duration-200 text-center ${
+                      selectedDedication === option.value
+                        ? "border-[#d88200] bg-[#d88200]/10 text-[#d88200]"
+                        : "border-gray-300 hover:border-[#d88200]/50 text-gray-700"
+                    }`}
+                  >
+                    <span className="font-medium text-sm">{option.label}</span>
+                  </div>
+                ))}
+              </div>
 
               {/* Display selected dedication */}
               <div className="p-4 bg-gray-50 rounded-sm">
