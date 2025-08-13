@@ -5,7 +5,8 @@ export interface Product {
   oldPrice: number
   image: string
   images: string[]
-  category: string // Changed from "fille" | "garcon" to string
+  category: string
+  age: string // Add age variable
   description?: string
 }
 
@@ -17,12 +18,9 @@ export const mockProducts: Product[] = [
     price: 120,
     oldPrice: 150,
     image: "/p1.avif",
-    images: [
-      "/p1.avif",
-      "/p1.avif",
-      "/p1.avif",
-    ],
+    images: ["/p1.avif", "/p1.avif", "/p1.avif"],
     category: "aventure",
+    age: "3-6 ans",
     description:
       "Une histoire magique personnalisée où votre petite princesse vit une aventure extraordinaire avec un dragon bienveillant.",
   },
@@ -32,11 +30,9 @@ export const mockProducts: Product[] = [
     price: 95,
     oldPrice: 120,
     image: "/p1.avif",
-    images: [
-      "/p1.avif",
-      "/p1.avif",
-    ],
+    images: ["/p1.avif", "/p1.avif"],
     category: "aventure",
+    age: "0-3 ans",
     description: "Votre enfant devient l'héroïne d'une aventure féerique parmi les étoiles.",
   },
   {
@@ -45,11 +41,9 @@ export const mockProducts: Product[] = [
     price: 80,
     oldPrice: 100,
     image: "/p1.avif",
-    images: [
-      "/p1.avif",
-      "/p1.avif",
-    ],
+    images: ["/p1.avif", "/p1.avif"],
     category: "sommeil",
+    age: "3-6 ans",
     description: "Une histoire enchantée dans un royaume peuplé de licornes magiques.",
   },
   {
@@ -58,11 +52,9 @@ export const mockProducts: Product[] = [
     price: 110,
     oldPrice: 140,
     image: "/p1.avif",
-    images: [
-      "/p1.avif",
-      "/p1.avif",
-    ],
+    images: ["/p1.avif", "/p1.avif"],
     category: "sommeil",
+    age: "6 ans et +",
     description: "Votre petite danseuse découvre un château magique rempli de surprises.",
   },
 
@@ -73,11 +65,9 @@ export const mockProducts: Product[] = [
     price: 130,
     oldPrice: 160,
     image: "/p1.avif",
-    images: [
-      "/p1.avif",
-      "/p1.avif",
-    ],
+    images: ["/p1.avif", "/p1.avif"],
     category: "aventure",
+    age: "6 ans et +",
     description: "Une aventure palpitante où votre petit pirate part à la recherche d'un trésor légendaire.",
   },
   {
@@ -86,11 +76,9 @@ export const mockProducts: Product[] = [
     price: 115,
     oldPrice: 145,
     image: "/p1.avif",
-    images: [
-      "/p1.avif",
-      "/p1.avif",
-    ],
+    images: ["/p1.avif", "/p1.avif"],
     category: "aventure",
+    age: "Famille",
     description: "Votre enfant devient un courageux explorateur dans une jungle mystérieuse.",
   },
   {
@@ -99,11 +87,9 @@ export const mockProducts: Product[] = [
     price: 125,
     oldPrice: 155,
     image: "/p1.avif",
-    images: [
-      "/p1.avif",
-      "/p1.avif",
-    ],
+    images: ["/p1.avif", "/p1.avif"],
     category: "aventure",
+    age: "3-6 ans",
     description: "Une épopée héroïque où votre petit chevalier affronte un dragon pour sauver le royaume.",
   },
   {
@@ -112,11 +98,9 @@ export const mockProducts: Product[] = [
     price: 140,
     oldPrice: 170,
     image: "/p1.avif",
-    images: [
-      "/p1.avif",
-      "/p1.avif",
-    ],
+    images: ["/p1.avif", "/p1.avif"],
     category: "sommeil",
+    age: "Famille",
     description: "Une aventure spatiale extraordinaire sur une planète pleine de mystères.",
   },
 ]

@@ -14,52 +14,51 @@ export default function TestimonialsSection() {
   const testimonials = [
     {
       quote:
-        "Ma fille Emma adore ses histoires personnalisées pour le coucher ! Elle est tellement excitée quand elle est la princesse courageuse qui sauve la situation. Kids Story Time a rendu le coucher magique à nouveau !",
+        "Ma fille Lina adore ses histoires personnalisées ! Elle est tellement excitée quand elle est la princesse courageuse. Kids Story Time a rendu le coucher magique !",
       image: "/t1.avif",
-      name: "Sarah Johnson",
+      name: "Aicha Benali",
       position: "Maman de 2 enfants",
       rating: 5,
     },
     {
-      quote:
-        "La qualité des histoires est incroyable ! Mon fils Jake demande ses histoires d'aventure chaque soir. Les détails personnalisés lui donnent l'impression d'être un vrai héros. Je recommande vivement !",
+      quote: "Excellent service ! Mon fils Youssef demande ses histoires d'aventure chaque soir.",
       image: "/t2.avif",
-      name: "Michael Chen",
+      name: "Omar Alami",
       position: "Papa de 3 enfants",
       rating: 5,
     },
     {
       quote:
-        "Ces histoires personnalisées ont complètement transformé notre routine du coucher. Mes jumeaux adorent entendre leurs aventures ensemble comme explorateurs de l'espace et détectives sous-marins !",
+        "Ces histoires personnalisées ont complètement transformé notre routine du coucher. Mes jumeaux Salma et Karim adorent entendre leurs aventures ensemble comme explorateurs de l'espace et détectives sous-marins ! C'est vraiment magique de voir leurs visages s'illuminer.",
       image:
         "https://plus.unsplash.com/premium_photo-1690294614341-cf346ba0a637?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D",
-      name: "Lisa Rodriguez",
+      name: "Fatima Zahra",
       position: "Maman de jumeaux",
       rating: 5,
     },
     {
       quote:
-        "Service incroyable ! Les histoires sont magnifiquement écrites et ma fille Sophia se voit comme le personnage principal. Cela a énormément renforcé sa confiance et son imagination.",
+        "Service incroyable ! Les histoires sont magnifiquement écrites et ma fille Amina se voit comme le personnage principal. Cela a énormément renforcé sa confiance.",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-      name: "David Thompson",
+      name: "Rachid Tazi",
       position: "Papa fier",
       rating: 5,
     },
     {
       quote:
-        "Kids Story Time crée de la magie pure ! Le visage de mon fils Oliver s'illumine quand il entend son nom dans les histoires. La créativité et l'attention aux détails sont exceptionnelles.",
+        "Kids Story Time crée de la magie pure ! Le visage de mon fils Mehdi s'illumine quand il entend son nom dans les histoires.",
       image:
         "https://images.unsplash.com/photo-1719844319025-0c144c741041?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D",
-      name: "Amanda Foster",
+      name: "Khadija Idrissi",
       position: "Cliente satisfaite",
       rating: 5,
     },
     {
       quote:
-        "Service professionnel avec des résultats touchants. L'équipe prend le temps de comprendre les intérêts de chaque enfant. Les histoires d'aventure de dinosaures de ma fille sont ses préférées !",
+        "Service professionnel avec des résultats touchants. L'équipe prend le temps de comprendre les intérêts de chaque enfant. Les histoires d'aventure de dinosaures de ma fille Yasmine sont ses préférées ! Je recommande vivement ce service unique.",
       image:
         "https://images.unsplash.com/photo-1629172015687-c446c28cb858?q=80&w=690&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D",
-      name: "Robert Kim",
+      name: "Hassan Benjelloun",
       position: "Client régulier",
       rating: 5,
     },
