@@ -18,6 +18,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const [selectedCategory, setSelectedCategory] = useState("fille")
   const [childName, setChildName] = useState("")
   const [selectedDedication, setSelectedDedication] = useState("1")
+  const [nameError, setNameError] = useState("")
 
   // Get related products (exclude current product)
   const relatedProducts = mockProducts.filter((p) => p.id !== product.id).slice(0, 4)
@@ -71,12 +72,18 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   }
 
   const handleViewPreview = () => {
+    // Validate required fields
+    if (!childName.trim()) {
+      setNameError("Le prénom de l'enfant est obligatoire")
+      return
+    }
+
     // Store product info in localStorage
     const productInfo = {
       product,
       quantity,
       selectedCategory,
-      childName,
+      childName: childName.trim(),
       selectedDedication,
       dedicationText: getSelectedDedicText(),
     }
@@ -88,13 +95,19 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   }
 
   const handleWhatsAppInquiry = () => {
+    // Validate required fields
+    if (!childName.trim()) {
+      setNameError("Le prénom de l'enfant est obligatoire")
+      return
+    }
+
     const phoneNumber = "+212696570164"
     let message = `Bonjour, je suis intéressé(e) par cette histoire:\n\n`
     message += `*${product.name}*\n`
     message += `Prix: ${product.price} DH\n`
     message += `Catégorie: ${selectedCategory}\n`
     message += `Âge: ${product.age}\n`
-    if (childName) message += `Prénom: ${childName}\n`
+    message += `Prénom: ${childName.trim()}\n`
     message += `Dédicace: ${selectedDedication}\n`
     message += `\nPouvez-vous me donner plus d'informations?`
 
@@ -248,14 +261,25 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
             {/* Child Name Input */}
             <div>
-              <h3 className="text-lg font-black text-[#d88200] mb-3">Prénom de l'enfant</h3>
+              <h3 className="text-lg font-black text-[#d88200] mb-3">
+                Prénom de l'enfant <span className="text-red-500">*</span>
+              </h3>
               <input
                 type="text"
                 value={childName}
-                onChange={(e) => setChildName(e.target.value)}
+                onChange={(e) => {
+                  setChildName(e.target.value)
+                  if (nameError) setNameError("") // Clear error when user starts typing
+                }}
                 placeholder="Entrez le prénom de l'enfant"
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#d88200] focus:border-[#d88200] font-normal"
+                className={`w-full p-3 border rounded-md focus:outline-none focus:ring-1 font-normal transition-colors ${
+                  nameError
+                    ? "border-red-500 focus:ring-red-500 focus:border-red-500"
+                    : "border-gray-300 focus:ring-[#d88200] focus:border-[#d88200]"
+                }`}
+                required
               />
+              {nameError && <p className="text-red-500 text-sm mt-1 font-medium">{nameError}</p>}
             </div>
 
             {/* Dedication Selection - Checkbox Style */}

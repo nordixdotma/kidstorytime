@@ -1,8 +1,5 @@
 import { notFound } from "next/navigation"
 import { getProductById } from "@/lib/mock-products"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
-import WhatsAppButton from "@/components/whatsapp-button"
 import ApercuContent from "@/components/apercu-content"
 import CartModal from "@/components/cart-modal"
 
@@ -22,12 +19,7 @@ export default function ApercuPage({ params }: ApercuPageProps) {
 
   return (
     <main className="min-h-screen bg-white">
-      <Header forceWhite={true} />
-      <div className="pt-28 md:pt-32">
-        <ApercuContent product={product} />
-      </div>
-      <Footer />
-      <WhatsAppButton />
+      <ApercuContent product={product} />
       <CartModal />
     </main>
   )
