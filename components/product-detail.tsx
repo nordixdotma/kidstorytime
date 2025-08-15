@@ -305,7 +305,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               </div>
 
               {/* Display selected dedication */}
-              <div className="p-4 bg-gray-50 rounded-sm">
+              <div className="p-4 bg-gray-100 rounded-sm">
                 <p className="text-sm sm:text-base text-gray-700 italic">
                   {getSelectedDedicText().replace(/\[Prénom de l'enfant\]/g, "**[Prénom de l'enfant]**")}
                 </p>

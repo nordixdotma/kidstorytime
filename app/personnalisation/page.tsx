@@ -6,6 +6,7 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import WhatsAppButton from "@/components/whatsapp-button"
 import { Card, CardContent } from "@/components/ui/card"
+import CartModal from "@/components/cart-modal"
 
 export default function PersonnalisationPage() {
   const router = useRouter()
@@ -171,6 +172,7 @@ export default function PersonnalisationPage() {
 
       <Footer />
       <WhatsAppButton />
+      <CartModal />
     </div>
   )
 }
