@@ -59,7 +59,7 @@ export default function StoryCategoriesSection() {
             </div>
             <div className="relative z-10 h-96 flex flex-col justify-end p-0">
               <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-lg mx-auto mb-4 p-4 w-11/12">
-                <div className="flex items-center justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div className="flex-1">
                     <h3 className="text-xl font-bold mb-2 text-white">Histoires Uniques</h3>
                     <p className="text-sm text-white/90 leading-relaxed">
@@ -67,7 +67,7 @@ export default function StoryCategoriesSection() {
                     </p>
                   </div>
                   <Link href="/boutique">
-                    <button className="px-4 py-2 bg-[#d88200] text-white font-semibold rounded-lg text-sm whitespace-nowrap relative overflow-hidden group transition-all duration-300 hover:text-white">
+                    <button className="w-full sm:w-auto px-4 py-2 bg-[#d88200] text-white font-semibold rounded-lg text-sm whitespace-nowrap relative overflow-hidden group transition-all duration-300 hover:text-white">
                       <span className="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></span>
                       <span className="relative z-10">Découvrir</span>
                     </button>
@@ -89,7 +89,7 @@ export default function StoryCategoriesSection() {
             </div>
             <div className="relative z-10 h-96 flex flex-col justify-end p-0">
               <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-lg mx-auto mb-4 p-4 w-11/12">
-                <div className="flex items-center justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div className="flex-1">
                     <h3 className="text-xl font-bold mb-2 text-white">Personnalisation Facile</h3>
                     <p className="text-sm text-white/90 leading-relaxed">
@@ -97,7 +97,7 @@ export default function StoryCategoriesSection() {
                     </p>
                   </div>
                   <Link href="/personnalisation">
-                    <button className="px-4 py-2 bg-[#d88200] text-white font-semibold rounded-lg text-sm whitespace-nowrap relative overflow-hidden group transition-all duration-300 hover:text-white">
+                    <button className="w-full sm:w-auto px-4 py-2 bg-[#d88200] text-white font-semibold rounded-lg text-sm whitespace-nowrap relative overflow-hidden group transition-all duration-300 hover:text-white">
                       <span className="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></span>
                       <span className="relative z-10">Commencer</span>
                     </button>

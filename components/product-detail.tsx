@@ -214,25 +214,29 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#d88200] mb-2">{product.name}</h1>
+                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-[#d88200] mb-2">
+                  {product.name}
+                </h1>
 
                 <div className="mb-3 flex gap-4">
-                  <p className="text-gray-600 text-base">Catégorie: {product.category}</p>
-                  <p className="text-gray-600 text-base">Âge: {product.age}</p>
+                  <p className="text-gray-600 text-sm sm:text-base">Catégorie: {product.category}</p>
+                  <p className="text-gray-600 text-sm sm:text-base">Âge: {product.age}</p>
                 </div>
 
                 {/* Pricing */}
                 <div className="mb-2">
-                  <p className="text-lg text-gray-400 line-through font-normal">{product.oldPrice} DH</p>
-                  <p className="text-2xl sm:text-3xl font-black text-[#d88200]">{product.price} DH</p>
-                  <p className="text-sm text-green-600 font-normal">Économisez {product.oldPrice - product.price} DH</p>
+                  <p className="text-base sm:text-lg text-gray-400 line-through font-normal">{product.oldPrice} DH</p>
+                  <p className="text-xl sm:text-2xl md:text-3xl font-black text-[#d88200]">{product.price} DH</p>
+                  <p className="text-xs sm:text-sm text-green-600 font-normal">
+                    Économisez {product.oldPrice - product.price} DH
+                  </p>
                 </div>
               </motion.div>
             </div>
 
             {/* Genre Selection */}
             <div>
-              <h3 className="text-lg font-black text-[#d88200] mb-3">Genre</h3>
+              <h3 className="text-base sm:text-lg font-black text-[#d88200] mb-3">Genre</h3>
               <div className="flex gap-3">
                 <div
                   onClick={() => setSelectedCategory("fille")}
@@ -260,7 +264,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
             {/* Child Name Input */}
             <div>
-              <h3 className="text-lg font-black text-[#d88200] mb-3">
+              <h3 className="text-base sm:text-lg font-black text-[#d88200] mb-3">
                 Prénom de l'enfant <span className="text-red-500">*</span>
               </h3>
               <input
@@ -283,7 +287,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
             {/* Dedication Selection - Checkbox Style */}
             <div>
-              <h3 className="text-lg font-black text-[#d88200] mb-3">Dédicace personnalisée</h3>
+              <h3 className="text-base sm:text-lg font-black text-[#d88200] mb-3">Dédicace personnalisée</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
                 {dedicationOptions.map((option) => (
                   <div
@@ -302,7 +306,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
               {/* Display selected dedication */}
               <div className="p-4 bg-gray-50 rounded-sm">
-                <p className="text-md text-gray-700 italic">
+                <p className="text-sm sm:text-base text-gray-700 italic">
                   {getSelectedDedicText().replace(/\[Prénom de l'enfant\]/g, "**[Prénom de l'enfant]**")}
                 </p>
               </div>
@@ -310,7 +314,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
             {/* Product Description */}
             <div>
-              <h3 className="text-lg font-black text-[#d88200] mb-3">Description</h3>
+              <h3 className="text-base sm:text-lg font-black text-[#d88200] mb-3">Description</h3>
               <p className="text-gray-600 font-normal leading-relaxed">
                 {product.description ||
                   `Découvrez **${product.name}**, une histoire personnalisée qui captivera votre enfant. 
@@ -323,7 +327,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               <Truck size={18} className="text-green-500 mr-3" />
               <div>
                 <p className="font-medium text-green-700">Livraison disponible</p>
-                <p className="text-xs text-gray-600">Livraison dans tout le Maroc</p>
+                <p className="text-xs sm:text-sm text-gray-600">Livraison dans tout le Maroc</p>
               </div>
             </div>
 

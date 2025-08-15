@@ -37,11 +37,11 @@ export default function AnimatedSection({
         return `${baseClasses} ${durationClass} ${delayClass} ${isVisible ? "opacity-100" : "opacity-0"}`
       case "slideLeft":
         return `${baseClasses} ${durationClass} ${delayClass} ${
-          isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4"
+          isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
         }`
       case "slideRight":
         return `${baseClasses} ${durationClass} ${delayClass} ${
-          isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
+          isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
         }`
       case "scale":
         return `${baseClasses} ${durationClass} ${delayClass} ${
@@ -55,8 +55,8 @@ export default function AnimatedSection({
   }
 
   return (
-    <section ref={elementRef} className={`overflow-hidden ${getAnimationClasses()} ${className}`}>
-      {children}
+    <section ref={elementRef} className={`w-full max-w-full overflow-hidden ${getAnimationClasses()} ${className}`}>
+      <div className="w-full max-w-full overflow-hidden">{children}</div>
     </section>
   )
 }
