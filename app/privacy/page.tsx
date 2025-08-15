@@ -3,6 +3,7 @@
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import WhatsAppButton from "@/components/whatsapp-button"
+import CartModal from "@/components/cart-modal"
 
 export default function PrivacyPage() {
   return (
@@ -119,6 +120,7 @@ export default function PrivacyPage() {
 
       <Footer />
       <WhatsAppButton />
+      <CartModal />
     </div>
   )
 }

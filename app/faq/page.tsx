@@ -5,6 +5,7 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import WhatsAppButton from "@/components/whatsapp-button"
 import { ChevronDown, ChevronUp } from "lucide-react"
+import CartModal from "@/components/cart-modal"
 
 const faqData = [
   {
@@ -119,6 +120,7 @@ export default function FAQPage() {
 
       <Footer />
       <WhatsAppButton />
+      <CartModal />
     </div>
   )
 }
