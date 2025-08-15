@@ -1,18 +1,20 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Truck, ArrowLeft, ArrowRight } from "lucide-react"
 import type { Product } from "@/lib/mock-products"
-import Link from "next/link"
-import ProductGrid from "./product-grid"
 import { mockProducts } from "@/lib/mock-products"
+import { AnimatePresence, motion } from "framer-motion"
+import { ArrowLeft, ArrowRight, Truck } from "lucide-react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import ProductGrid from "./product-grid"
 
 interface ProductDetailProps {
   product: Product
 }
 
 export default function ProductDetail({ product }: ProductDetailProps) {
+  const router = useRouter()
   const [selectedImage, setSelectedImage] = useState(0)
   const [quantity, setQuantity] = useState(1)
   const [selectedCategory, setSelectedCategory] = useState("fille")
@@ -90,8 +92,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
     localStorage.setItem("product-preview", JSON.stringify(productInfo))
 
-    // Navigate to preview page
-    window.location.href = `/apercu/${product.id}`
+    // Navigate to preview page using Next.js router
+    router.push(`/apercu/${product.id}`)
   }
 
   const handleWhatsAppInquiry = () => {

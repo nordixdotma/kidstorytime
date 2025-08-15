@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import type { Product } from "@/lib/mock-products"
 import { motion } from "framer-motion"
 import { ArrowLeft, BookOpen, Sparkles } from "lucide-react"
-import type { Product } from "@/lib/mock-products"
 import Link from "next/link"
+import { useEffect, useState } from "react"
 
 interface ApercuContentProps {
   product: Product
@@ -37,18 +37,11 @@ export default function ApercuContent({ product }: ApercuContentProps) {
     setIsLoading(false)
   }, [])
 
-  const handleAddToCart = () => {
+  const handleOrder = () => {
     if (!productPreview) return
 
-    console.log("[v0] Adding to cart:", productPreview)
-
-    // Get existing cart items
-    const existingCart = JSON.parse(localStorage.getItem("cart") || "[]")
-    console.log("[v0] Existing cart:", existingCart)
-
-    // Create cart item
-    const cartItem = {
-      id: Date.now(), // unique id for this cart item
+    // Store order info in localStorage for checkout
+    const orderInfo = {
       productId: productPreview.product.id,
       name: productPreview.product.name,
       price: productPreview.product.price,
@@ -62,19 +55,10 @@ export default function ApercuContent({ product }: ApercuContentProps) {
       },
     }
 
-    console.log("[v0] Cart item to add:", cartItem)
+    localStorage.setItem("checkout-order", JSON.stringify(orderInfo))
 
-    // Add to cart
-    const updatedCart = [...existingCart, cartItem]
-    localStorage.setItem("cart", JSON.stringify(updatedCart))
-    console.log("[v0] Updated cart saved:", updatedCart)
-
-    // Trigger cart update event
-    window.dispatchEvent(new Event("cartUpdated"))
-    console.log("[v0] Cart update event dispatched")
-
-    // Show success message or redirect
-    alert("Produit ajouté au panier avec succès!")
+    // Navigate to checkout page
+    window.location.href = "/checkout"
   }
 
   if (isLoading) {
@@ -154,6 +138,31 @@ export default function ApercuContent({ product }: ApercuContentProps) {
             personnalisée.
           </p>
 
+          {/* Story Preview Images */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 max-w-4xl mx-auto">
+            <div className="aspect-[3/4] bg-gray-100 rounded-lg overflow-hidden shadow-md">
+              <img
+                src="/apercu/cover.png"
+                alt="Couverture de l'histoire"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="aspect-[3/4] bg-gray-100 rounded-lg overflow-hidden shadow-md">
+              <img
+                src="/apercu/1st-page.png"
+                alt="Première page de l'histoire"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="aspect-[3/4] bg-gray-100 rounded-lg overflow-hidden shadow-md">
+              <img
+                src="/apercu/3rd-page.png"
+                alt="Troisième page de l'histoire"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+
           {/* Product Info Summary */}
           <div className="bg-white rounded-lg p-6 max-w-md mx-auto shadow-sm">
             <h3 className="font-bold text-gray-900 mb-4">Résumé de votre commande</h3>
@@ -185,10 +194,10 @@ export default function ApercuContent({ product }: ApercuContentProps) {
 
           <div className="mt-8">
             <button
-              onClick={handleAddToCart}
+              onClick={handleOrder}
               className="bg-[#d88200] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#c07600] transition-colors"
             >
-              Ajouter au panier
+              Commander
             </button>
           </div>
         </div>
