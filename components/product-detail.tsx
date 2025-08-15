@@ -312,7 +312,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               <h3 className="text-lg font-black text-[#d88200] mb-3">Description</h3>
               <p className="text-gray-600 font-normal leading-relaxed">
                 {product.description ||
-                  `Découvrez ${product.name}, une histoire personnalisée qui captivera votre enfant. 
+                  `Découvrez **${product.name}**, une histoire personnalisée qui captivera votre enfant. 
                   Chaque histoire est unique et adaptée spécialement pour créer des souvenirs inoubliables.`}
               </p>
             </div>

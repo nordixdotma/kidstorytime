@@ -37,6 +37,46 @@ export default function ApercuContent({ product }: ApercuContentProps) {
     setIsLoading(false)
   }, [])
 
+  const handleAddToCart = () => {
+    if (!productPreview) return
+
+    console.log("[v0] Adding to cart:", productPreview)
+
+    // Get existing cart items
+    const existingCart = JSON.parse(localStorage.getItem("cart") || "[]")
+    console.log("[v0] Existing cart:", existingCart)
+
+    // Create cart item
+    const cartItem = {
+      id: Date.now(), // unique id for this cart item
+      productId: productPreview.product.id,
+      name: productPreview.product.name,
+      price: productPreview.product.price,
+      image: productPreview.product.image,
+      quantity: productPreview.quantity,
+      customization: {
+        category: productPreview.selectedCategory,
+        childName: productPreview.childName,
+        dedication: productPreview.selectedDedication,
+        dedicationText: productPreview.dedicationText,
+      },
+    }
+
+    console.log("[v0] Cart item to add:", cartItem)
+
+    // Add to cart
+    const updatedCart = [...existingCart, cartItem]
+    localStorage.setItem("cart", JSON.stringify(updatedCart))
+    console.log("[v0] Updated cart saved:", updatedCart)
+
+    // Trigger cart update event
+    window.dispatchEvent(new Event("cartUpdated"))
+    console.log("[v0] Cart update event dispatched")
+
+    // Show success message or redirect
+    alert("Produit ajouté au panier avec succès!")
+  }
+
   if (isLoading) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -144,7 +184,10 @@ export default function ApercuContent({ product }: ApercuContentProps) {
           </div>
 
           <div className="mt-8">
-            <button className="bg-[#d88200] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#c07600] transition-colors">
+            <button
+              onClick={handleAddToCart}
+              className="bg-[#d88200] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#c07600] transition-colors"
+            >
               Ajouter au panier
             </button>
           </div>

@@ -44,16 +44,19 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="mb-3">
           <div className="flex items-center justify-between mb-1">
             <span className="text-sm text-gray-400 line-through font-normal">DH{product.oldPrice}.00</span>
-            <span className="text-sm text-gray-600 font-medium">DH{product.price}.00</span>
+            <span className="text-sm text-gray-600 font-bold">DH{product.price}.00</span>
           </div>
         </div>
 
         {/* CTA Button */}
         <div className="mt-auto">
           <Link href={`/products/${product.id}`} className="block">
-            <button className="w-full bg-[#d88200] text-white py-2 px-4 rounded-sm text-sm font-medium hover:bg-[#c07600] transition-colors duration-200 text-center">
-              <span className="md:hidden">Voir</span>
-              <span className="hidden md:inline">Voir les détails</span>
+            <button className="relative w-full bg-[#d88200] text-white py-2 px-4 rounded-sm text-sm font-medium transition-colors duration-300 text-center overflow-hidden group/btn">
+              <span className="relative z-10 transition-colors duration-300 group-hover/btn:text-white">
+                <span className="md:hidden">Voir</span>
+                <span className="hidden md:inline">Voir les détails</span>
+              </span>
+              <div className="absolute inset-0 bg-black scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-300 origin-center"></div>
             </button>
           </Link>
         </div>

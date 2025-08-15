@@ -48,21 +48,23 @@ export default function HeroSection() {
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/40"></div>
 
-      {/* Hero Content - Moved down */}
-      <div className="relative z-10 h-full flex items-end justify-center px-4 pb-32">
-        <div className="max-w-7xl mx-auto w-full">
-          <div className="max-w-4xl text-center mx-auto">
+      <div className="relative z-10 h-full flex items-center justify-center px-4">
+        <div className="max-w-6xl mx-auto w-full">
+          <div className="max-w-5xl text-center mx-auto">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-medium text-white leading-tight mb-6">
               Histoires Personnalisées pour Enfant
             </h1>
-            <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-4xl mx-auto">
               Créez des souvenirs inoubliables avec des histoires uniques pour vos enfants.
             </p>
             <Link
               href="/boutique"
-              className="inline-block bg-[#d88200] hover:bg-[#c07600] text-white font-medium px-8 py-4 text-lg transition-colors duration-300 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="relative inline-block bg-[#d88200] text-white font-medium px-8 py-4 text-lg transition-all duration-300 rounded-full transform hover:scale-105 overflow-hidden group"
             >
-              Voir nos livres
+              <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
+                Voir nos histoires
+              </span>
+              <div className="absolute inset-0 bg-black scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center rounded-full"></div>
             </Link>
           </div>
         </div>

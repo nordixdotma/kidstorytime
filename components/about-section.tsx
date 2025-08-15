@@ -7,11 +7,18 @@ interface CounterProps {
   end: number
   duration?: number
   suffix?: string
+  isVisible: boolean
 }
 
-function Counter({ end, duration = 2000, suffix = "" }: CounterProps) {
+function Counter({ end, duration = 2000, suffix = "", isVisible }: CounterProps) {
   const [count, setCount] = useState(0)
   const [hasStarted, setHasStarted] = useState(false)
+
+  useEffect(() => {
+    if (isVisible && !hasStarted) {
+      setHasStarted(true)
+    }
+  }, [isVisible, hasStarted])
 
   useEffect(() => {
     if (!hasStarted) return
@@ -42,18 +49,6 @@ function Counter({ end, duration = 2000, suffix = "" }: CounterProps) {
       }
     }
   }, [end, duration, hasStarted])
-
-  const startAnimation = () => {
-    setHasStarted(true)
-  }
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      startAnimation()
-    }, 500)
-
-    return () => clearTimeout(timer)
-  }, [])
 
   return (
     <span className="text-4xl md:text-5xl font-black text-white">
@@ -94,7 +89,7 @@ export default function AboutSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="about" className="py-20 bg-gray-50 overflow-hidden">
+    <section ref={sectionRef} id="about" className="py-20 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
@@ -147,13 +142,13 @@ export default function AboutSection() {
                 <div className="grid grid-cols-2 gap-8 text-center">
                   <div>
                     <div className="mb-2">
-                      <Counter end={600} suffix="+" duration={2000} />
+                      <Counter end={600} suffix="+" duration={2500} isVisible={isVisible} />
                     </div>
                     <p className="text-white font-medium">Livraison rapide</p>
                   </div>
                   <div>
                     <div className="mb-2">
-                      <Counter end={12} suffix="" duration={2000} />
+                      <Counter end={12} suffix="" duration={2000} isVisible={isVisible} />
                     </div>
                     <p className="text-white font-medium">Histoires personnalisées</p>
                   </div>

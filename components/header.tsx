@@ -189,7 +189,7 @@ export default function Header({ forceWhite = false }: HeaderProps) {
                   <img
                     src={isScrolled ? "/logo.png" : "/logo.png"}
                     alt="Kids Story Time Logo"
-                    className="h-10 md:h-12 w-auto transition-opacity duration-300"
+                    className="h-10 md:h-14 w-auto transition-opacity duration-300"
                   />
                 </Link>
               </div>

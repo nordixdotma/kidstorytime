@@ -65,13 +65,13 @@ export default function TestimonialsSection() {
   ]
 
   return (
-    <section id="testimonials" className="py-16 sm:py-24 relative overflow-hidden bg-gray-50">
+    <section id="testimonials" className="py-16 sm:py-24 relative overflow-hidden bg-white">
       <div className="max-w-7xl mx-auto px-2 md:px-4 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-left mb-16">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl md:text-5xl mb-4">
             Ce que disent les <span className="text-[#d88200]">parents</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl">
             Découvrez pourquoi les familles adorent nos histoires personnalisées
           </p>
         </div>

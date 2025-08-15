@@ -105,6 +105,59 @@ export const mockProducts: Product[] = [
   },
 ]
 
+export const specialProducts: Product[] = [
+  {
+    id: 101,
+    name: "Mon Aventure Personnalisée",
+    price: 120,
+    oldPrice: 150,
+    image: "/p1.avif",
+    images: ["/p1.avif", "/p1.avif", "/p1.avif"],
+    category: "aventure",
+    age: "3-6 ans",
+    description: "Une histoire unique où votre enfant devient le héros de sa propre aventure magique.",
+  },
+  {
+    id: 102,
+    name: "Le Livre des Rêves",
+    price: 110,
+    oldPrice: 140,
+    image: "/p1.avif",
+    images: ["/p1.avif", "/p1.avif"],
+    category: "sommeil",
+    age: "0-3 ans",
+    description: "Des histoires douces et apaisantes pour accompagner votre enfant vers de beaux rêves.",
+  },
+  {
+    id: 103,
+    name: "L'Explorateur Courageux",
+    price: 130,
+    oldPrice: 160,
+    image: "/p1.avif",
+    images: ["/p1.avif", "/p1.avif"],
+    category: "aventure",
+    age: "6 ans et +",
+    description: "Votre enfant part à la découverte de mondes extraordinaires dans cette épopée personnalisée.",
+  },
+  {
+    id: 104,
+    name: "Ma Famille d'Amour",
+    price: 125,
+    oldPrice: 155,
+    image: "/p1.avif",
+    images: ["/p1.avif", "/p1.avif"],
+    category: "famille",
+    age: "Famille",
+    description: "Une histoire touchante qui célèbre l'amour familial avec votre enfant comme personnage principal.",
+  },
+]
+
 export function getProductById(id: number): Product | undefined {
-  return mockProducts.find((product) => product.id === id)
+  const mainProduct = mockProducts.find((product) => product.id === id)
+  if (mainProduct) return mainProduct
+
+  const specialProduct = specialProducts.find((product) => product.id === id)
+  return specialProduct
 }
+
+export const allProducts = [...mockProducts, ...specialProducts]

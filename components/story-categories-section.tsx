@@ -37,82 +37,68 @@ export default function StoryCategoriesSection() {
         animate={inView ? "visible" : "hidden"}
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
-        {/* Section Header */}
-        <motion.div variants={itemVariants} className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-gray-900 mb-4">
+        <motion.div variants={itemVariants} className="text-left mb-12">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal text-gray-900 mb-4">
             Découvre nos catégories d'histoires où ton enfant est le héros !
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-sm text-gray-600 max-w-3xl">
             Parce que chaque enfant mérite une histoire rien que pour lui !
           </p>
         </motion.div>
 
-        {/* Two-section layout */}
-        <div className="space-y-16">
-          {/* First section with two cards - increased height from h-80 to h-96 */}
-          <motion.div variants={itemVariants} className="grid md:grid-cols-2 gap-8">
-            {/* Histoires Uniques */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-400 to-purple-600 text-white">
-              <div className="absolute inset-0">
-                <img src="/section.avif" alt="Histoires Uniques" className="w-full h-full object-cover opacity-80" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-              </div>
-              <div className="relative z-10 p-8 h-96 flex flex-col justify-end">
-                <h3 className="text-2xl font-bold mb-3">Histoires Uniques</h3>
-                <p className="text-white/90 mb-6 leading-relaxed">
-                  Offrez à vos enfants une expérience de lecture inoubliable et personnalisée !
-                </p>
-                <button className="self-start px-6 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-white font-semibold hover:bg-white/30 transition-all duration-300">
-                  Découvrir
-                </button>
+        <motion.div variants={itemVariants} className="grid md:grid-cols-2 gap-8">
+          {/* Histoires Uniques */}
+          <div className="relative overflow-hidden rounded-md bg-gradient-to-br from-blue-400 to-purple-600">
+            <div className="absolute inset-0">
+              <img src="/story.avif" alt="Histoires Uniques" className="w-full h-full object-cover opacity-80" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            </div>
+            <div className="relative z-10 h-96 flex flex-col justify-end p-0">
+              <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-lg mx-auto mb-4 p-4 w-11/12">
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold mb-2 text-white">Histoires Uniques</h3>
+                    <p className="text-sm text-white/90 leading-relaxed">
+                      Offrez à vos enfants une expérience de lecture inoubliable et personnalisée !
+                    </p>
+                  </div>
+                  <button className="px-4 py-2 bg-[#d88200] text-white font-semibold rounded-lg text-sm whitespace-nowrap relative overflow-hidden group transition-all duration-300 hover:text-white">
+                    <span className="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></span>
+                    <span className="relative z-10">Découvrir</span>
+                  </button>
+                </div>
               </div>
             </div>
-
-            {/* Personnalisation Facile */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-orange-400 to-red-500 text-white">
-              <div className="absolute inset-0">
-                <img
-                  src="/section.avif"
-                  alt="Personnalisation Facile"
-                  className="w-full h-full object-cover opacity-80"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-              </div>
-              <div className="relative z-10 p-8 h-96 flex flex-col justify-end">
-                <h3 className="text-2xl font-bold mb-3">Personnalisation Facile</h3>
-                <p className="text-white/90 mb-6 leading-relaxed">
-                  Choisissez une histoire et écrivez le prénom de votre enfant pour une expérience unique !
-                </p>
-                <button className="self-start px-6 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-white font-semibold hover:bg-white/30 transition-all duration-300">
-                  Commencer
-                </button>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Updated bottom section */}
-          <div className="bg-[#007d64] rounded-2xl overflow-hidden">
-            <motion.div variants={itemVariants} className="grid lg:grid-cols-2 gap-0 items-stretch min-h-[400px]">
-              {/* Left column - Image */}
-              <div className="relative overflow-hidden h-full min-h-[300px] lg:min-h-[400px]">
-                <img src="/section.avif" alt="Famille avec livre personnalisé" className="w-full h-full object-cover" />
-              </div>
-
-              {/* Right column - Text content */}
-              <div className="p-8 text-white flex flex-col justify-center">
-                <h3 className="text-3xl font-bold mb-6">Nos Catégories d'Histoires</h3>
-                <p className="mb-8 text-lg leading-relaxed">
-                  Histoires de Fêtes et Traditions pour célébrer les moments sacrés et transmettre leurs belles valeurs.
-                  Contes magiques et aventures des histoires fantastiques où l'imagination n'a pas de limite. Moments de
-                  vie en famille des histoires douces pour accompagner les grands moments de la vie.
-                </p>
-                <button className="px-8 py-4 bg-white/20 text-white font-semibold rounded-full hover:bg-white/30 transition-all duration-300 text-lg self-start">
-                  Explorez les histoires
-                </button>
-              </div>
-            </motion.div>
           </div>
-        </div>
+
+          {/* Personnalisation Facile */}
+          <div className="relative overflow-hidden rounded-md bg-gradient-to-br from-orange-400 to-red-500">
+            <div className="absolute inset-0">
+              <img
+                src="/story1.avif"
+                alt="Personnalisation Facile"
+                className="w-full h-full object-cover opacity-80"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            </div>
+            <div className="relative z-10 h-96 flex flex-col justify-end p-0">
+              <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-lg mx-auto mb-4 p-4 w-11/12">
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold mb-2 text-white">Personnalisation Facile</h3>
+                    <p className="text-sm text-white/90 leading-relaxed">
+                      Choisissez une histoire et écrivez le prénom de votre enfant pour une expérience unique !
+                    </p>
+                  </div>
+                  <button className="px-4 py-2 bg-[#d88200] text-white font-semibold rounded-lg text-sm whitespace-nowrap relative overflow-hidden group transition-all duration-300 hover:text-white">
+                    <span className="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></span>
+                    <span className="relative z-10">Commencer</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </motion.div>
     </section>
   )

@@ -1,44 +1,16 @@
 "use client"
 
-import { useState, useMemo } from "react"
 import { useInView } from "react-intersection-observer"
 import { motion } from "framer-motion"
 import ProductCard from "./product-card"
-import { mockProducts } from "@/lib/mock-products"
-import { ChevronDown } from "lucide-react"
+import { specialProducts } from "@/lib/mock-products"
+import Link from "next/link"
 
 export default function HomepageProductsSection() {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
-
-  const [sortBy, setSortBy] = useState("default")
-
-  // Apply sorting to products
-  const sortedProducts = useMemo(() => {
-    const products = [...mockProducts]
-
-    switch (sortBy) {
-      case "price-low":
-        products.sort((a, b) => a.price - b.price)
-        break
-      case "price-high":
-        products.sort((a, b) => b.price - a.price)
-        break
-      case "newest":
-        products.sort((a, b) => b.id - a.id)
-        break
-      case "name":
-        products.sort((a, b) => a.name.localeCompare(b.name))
-        break
-      default:
-        // Keep original order
-        break
-    }
-
-    return products // Show all products
-  }, [sortBy])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -59,54 +31,35 @@ export default function HomepageProductsSection() {
     },
   }
 
-  const sortOptions = [
-    { value: "default", label: "Défaut" },
-    { value: "price-low", label: "Prix: du plus bas au plus haut" },
-    { value: "price-high", label: "Prix: du plus haut au plus bas" },
-    { value: "name", label: "Nom: A-Z" },
-    { value: "newest", label: "Plus récent" },
-  ]
-
   return (
     <section className="py-12 sm:py-16 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Improved Sort Filter */}
-        <div className="flex justify-end mb-8">
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-gray-600 font-medium">Trier par:</span>
-            <div className="relative">
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="appearance-none bg-white border border-gray-200 rounded-lg px-4 py-2 pr-10 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#d88200] focus:border-[#d88200] cursor-pointer font-medium hover:border-[#d88200] transition-colors shadow-sm min-w-[200px]"
-              >
-                {sortOptions.map((option) => (
-                  <option key={option.value} value={option.value} className="bg-white text-gray-700 py-2">
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                <ChevronDown className="w-4 h-4 text-gray-400" />
-              </div>
-            </div>
-          </div>
+        <div className="mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Notre histoires</h2>
         </div>
 
-        {/* Products Grid */}
         <motion.div
           ref={ref}
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-8"
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
         >
-          {sortedProducts.map((product) => (
+          {specialProducts.map((product) => (
             <motion.div key={product.id} variants={itemVariants}>
               <ProductCard product={product} />
             </motion.div>
           ))}
         </motion.div>
+
+        <div className="text-center mt-8">
+          <Link href="/boutique">
+            <button className="relative bg-[#d88200] text-white px-8 py-3 rounded-sm font-medium transition-colors duration-300 overflow-hidden group">
+              <span className="relative z-10 transition-colors duration-300 group-hover:text-white">Voir tous</span>
+              <div className="absolute inset-0 bg-black scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></div>
+            </button>
+          </Link>
+        </div>
       </div>
     </section>
   )
