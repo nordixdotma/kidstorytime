@@ -1,12 +1,14 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import WhatsAppButton from "@/components/whatsapp-button"
 import { Card, CardContent } from "@/components/ui/card"
 
 export default function PersonnalisationPage() {
+  const router = useRouter()
   const [childName, setChildName] = useState("")
   const [dedication, setDedication] = useState("")
   const [selectedCharacter, setSelectedCharacter] = useState("")
@@ -49,6 +51,10 @@ export default function PersonnalisationPage() {
     },
   ]
 
+  const handleNavigateToBoutique = () => {
+    router.push("/boutique")
+  }
+
   return (
     <div className="min-h-screen">
       <Header forceWhite={true} />
@@ -89,6 +95,75 @@ export default function PersonnalisationPage() {
                   </CardContent>
                 </Card>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Histoires Personnalisées</h2>
+            <p className="text-lg text-gray-600">Créez une expérience de lecture unique pour votre enfant</p>
+          </div>
+
+          {/* Dédicace Spéciale Section */}
+          <div className="mb-20">
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div className="relative overflow-hidden rounded-2xl shadow-lg">
+                <img src="/per1.avif" alt="Livres d'enfants avec camion jouet" className="w-full h-64 object-cover" />
+              </div>
+              <div className="relative overflow-hidden rounded-2xl shadow-lg">
+                <img
+                  src="/per2.avif"
+                  alt="Page de livre personnalisé avec dédicace"
+                  className="w-full h-64 object-cover"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between text-center md:text-left">
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Dédicace Spéciale</h3>
+                <p className="text-gray-600 mb-6 md:mb-0">Personnalisez votre histoire avec un message touchant</p>
+              </div>
+              <button
+                onClick={handleNavigateToBoutique}
+                className="bg-white border-2 border-gray-300 text-gray-700 px-8 py-3 rounded-full font-medium hover:border-orange-400 hover:text-orange-600 transition-colors md:ml-8 flex-shrink-0"
+              >
+                Commencer
+              </button>
+            </div>
+          </div>
+
+          {/* Personnage Unique Section */}
+          <div>
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div className="relative overflow-hidden rounded-2xl shadow-lg">
+                <img
+                  src="/per3.avif"
+                  alt="Couverture de livre magique avec aventure au royaume animal"
+                  className="w-full h-64 object-cover"
+                />
+              </div>
+              <div className="relative overflow-hidden rounded-2xl shadow-lg">
+                <img
+                  src="/per4.avif"
+                  alt="Coin histoire livre personnalisé pour enfants"
+                  className="w-full h-64 object-cover"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between text-center md:text-left">
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Personnage Unique</h3>
+                <p className="text-gray-600 mb-6 md:mb-0">Choisissez le héros ou l'héroïne de votre histoire</p>
+              </div>
+              <button
+                onClick={handleNavigateToBoutique}
+                className="bg-white border-2 border-gray-300 text-gray-700 px-8 py-3 rounded-full font-medium hover:border-orange-400 hover:text-orange-600 transition-colors md:ml-8 flex-shrink-0"
+              >
+                Choisir
+              </button>
             </div>
           </div>
         </div>

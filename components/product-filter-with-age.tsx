@@ -70,11 +70,12 @@ export default function ProductFilterWithAge({
   // Get price ranges
   const getPriceRanges = () => [
     "Tous les prix",
-    "Moins de 500 DH",
-    "500 - 1000 DH",
-    "1000 - 2000 DH",
-    "2000 - 3000 DH",
-    "Plus de 3000 DH",
+    "Moins de 50 DH",
+    "50 - 100 DH",
+    "100 - 200 DH",
+    "200 - 300 DH",
+    "300 - 500 DH",
+    "Plus de 500 DH",
   ]
 
   // Get sort options
@@ -115,16 +116,18 @@ export default function ProductFilterWithAge({
 
   const getPriceRangeFromString = (priceString: string) => {
     switch (priceString) {
-      case "Moins de 500 DH":
-        return { min: 0, max: 500 }
-      case "500 - 1000 DH":
-        return { min: 500, max: 1000 }
-      case "1000 - 2000 DH":
-        return { min: 1000, max: 2000 }
-      case "2000 - 3000 DH":
-        return { min: 2000, max: 3000 }
-      case "Plus de 3000 DH":
-        return { min: 3000, max: 10000 }
+      case "Moins de 50 DH":
+        return { min: 0, max: 50 }
+      case "50 - 100 DH":
+        return { min: 50, max: 100 }
+      case "100 - 200 DH":
+        return { min: 100, max: 200 }
+      case "200 - 300 DH":
+        return { min: 200, max: 300 }
+      case "300 - 500 DH":
+        return { min: 300, max: 500 }
+      case "Plus de 500 DH":
+        return { min: 500, max: 10000 }
       default:
         return { min: 0, max: 10000 }
     }
