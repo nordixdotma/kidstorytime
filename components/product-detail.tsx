@@ -216,8 +216,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               >
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#d88200] mb-2">{product.name}</h1>
 
-                {/* Category and Age */}
-                <div className="mb-3 space-y-1">
+                <div className="mb-3 flex gap-4">
                   <p className="text-gray-600 text-base">Catégorie: {product.category}</p>
                   <p className="text-gray-600 text-base">Âge: {product.age}</p>
                 </div>
@@ -303,7 +302,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
               {/* Display selected dedication */}
               <div className="p-4 bg-gray-50 rounded-sm">
-                <p className="text-md text-gray-700 italic">{getSelectedDedicText()}</p>
+                <p className="text-md text-gray-700 italic">
+                  {getSelectedDedicText().replace(/\[Prénom de l'enfant\]/g, "**[Prénom de l'enfant]**")}
+                </p>
               </div>
             </div>
 

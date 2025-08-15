@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import SplitText from "./split-text"
 
 export default function HeroSection() {
   const [viewportHeight, setViewportHeight] = useState("100vh")
@@ -51,9 +52,13 @@ export default function HeroSection() {
       <div className="relative z-10 h-full flex items-center justify-center px-4">
         <div className="max-w-6xl mx-auto w-full">
           <div className="max-w-5xl text-center mx-auto">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-medium text-white leading-tight mb-6">
-              Histoires Personnalisées pour Enfant
-            </h1>
+            <SplitText
+              text="Histoires Personnalisées pour Enfant"
+              className="text-3xl md:text-5xl lg:text-6xl font-medium text-white leading-tight mb-6"
+              splitType="words"
+              delay={150}
+              duration={0.8}
+            />
             <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-4xl mx-auto">
               Créez des souvenirs inoubliables avec des histoires uniques pour vos enfants.
             </p>

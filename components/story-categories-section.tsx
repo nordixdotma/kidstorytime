@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
+import Link from "next/link"
+import SplitText from "./split-text"
 
 export default function StoryCategoriesSection() {
   const [ref, inView] = useInView({
@@ -38,9 +40,11 @@ export default function StoryCategoriesSection() {
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
         <motion.div variants={itemVariants} className="text-left mb-12">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal text-gray-900 mb-4">
-            Découvre nos catégories d'histoires où ton enfant est le héros !
-          </h2>
+          <SplitText
+            text="Découvre nos catégories d'histoires où ton enfant est le héros !"
+            className="text-2xl md:text-3xl lg:text-4xl font-normal text-gray-900 mb-4"
+            textAlign="left"
+          />
           <p className="text-sm text-gray-600 max-w-3xl">
             Parce que chaque enfant mérite une histoire rien que pour lui !
           </p>
@@ -50,7 +54,7 @@ export default function StoryCategoriesSection() {
           {/* Histoires Uniques */}
           <div className="relative overflow-hidden rounded-md bg-gradient-to-br from-blue-400 to-purple-600">
             <div className="absolute inset-0">
-              <img src="/story.avif" alt="Histoires Uniques" className="w-full h-full object-cover opacity-80" />
+              <img src="/section.avif" alt="Histoires Uniques" className="w-full h-full object-cover opacity-80" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
             </div>
             <div className="relative z-10 h-96 flex flex-col justify-end p-0">
@@ -62,10 +66,12 @@ export default function StoryCategoriesSection() {
                       Offrez à vos enfants une expérience de lecture inoubliable et personnalisée !
                     </p>
                   </div>
-                  <button className="px-4 py-2 bg-[#d88200] text-white font-semibold rounded-lg text-sm whitespace-nowrap relative overflow-hidden group transition-all duration-300 hover:text-white">
-                    <span className="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></span>
-                    <span className="relative z-10">Découvrir</span>
-                  </button>
+                  <Link href="/boutique">
+                    <button className="px-4 py-2 bg-[#d88200] text-white font-semibold rounded-lg text-sm whitespace-nowrap relative overflow-hidden group transition-all duration-300 hover:text-white">
+                      <span className="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></span>
+                      <span className="relative z-10">Découvrir</span>
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -75,7 +81,7 @@ export default function StoryCategoriesSection() {
           <div className="relative overflow-hidden rounded-md bg-gradient-to-br from-orange-400 to-red-500">
             <div className="absolute inset-0">
               <img
-                src="/story1.avif"
+                src="/section.avif"
                 alt="Personnalisation Facile"
                 className="w-full h-full object-cover opacity-80"
               />
@@ -90,10 +96,12 @@ export default function StoryCategoriesSection() {
                       Choisissez une histoire et écrivez le prénom de votre enfant pour une expérience unique !
                     </p>
                   </div>
-                  <button className="px-4 py-2 bg-[#d88200] text-white font-semibold rounded-lg text-sm whitespace-nowrap relative overflow-hidden group transition-all duration-300 hover:text-white">
-                    <span className="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></span>
-                    <span className="relative z-10">Commencer</span>
-                  </button>
+                  <Link href="/personnalisation">
+                    <button className="px-4 py-2 bg-[#d88200] text-white font-semibold rounded-lg text-sm whitespace-nowrap relative overflow-hidden group transition-all duration-300 hover:text-white">
+                      <span className="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></span>
+                      <span className="relative z-10">Commencer</span>
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
