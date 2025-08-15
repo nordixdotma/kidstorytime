@@ -17,7 +17,9 @@ export function Overview() {
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     .slice(0, 5)
 
-  const popularProducts = state.products.sort((a, b) => b.price - a.price).slice(0, 3)
+  const latestProducts = state.products
+    .sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime())
+    .slice(0, 3)
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -35,15 +37,14 @@ export function Overview() {
   }
 
   return (
-    <div className="p-6">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-slate-900 mb-2">Aperçu</h2>
+    <div className="p-4">
+      <div className="mb-4">
+        <h2 className="text-3xl font-bold text-slate-900 mb-2">Vue d'ensemble</h2>
         <p className="text-slate-600">Tableau de bord de votre boutique Kids Story Time</p>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <Card className="border-0 shadow-sm">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+        <Card className="border border-slate-200 shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-slate-600">Total Histoires</CardTitle>
             <Package className="h-4 w-4 text-primary" />
@@ -54,7 +55,7 @@ export function Overview() {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-sm">
+        <Card className="border border-slate-200 shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-slate-600">Total Commandes</CardTitle>
             <ShoppingCart className="h-4 w-4 text-primary" />
@@ -65,7 +66,7 @@ export function Overview() {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-sm">
+        <Card className="border border-slate-200 shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-slate-600">En Attente</CardTitle>
             <Clock className="h-4 w-4 text-yellow-600" />
@@ -76,7 +77,7 @@ export function Overview() {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-sm">
+        <Card className="border border-slate-200 shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-slate-600">Terminées</CardTitle>
             <CheckCircle className="h-4 w-4 text-green-600" />
@@ -88,18 +89,20 @@ export function Overview() {
         </Card>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Recent Orders */}
-        <Card className="border-0 shadow-sm">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <Card className="border border-slate-200 shadow-sm">
           <CardHeader>
             <CardTitle className="text-lg">Commandes Récentes</CardTitle>
             <CardDescription>Les dernières commandes reçues</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-3">
               {recentOrders.length > 0 ? (
                 recentOrders.map((order) => (
-                  <div key={order.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                  <div
+                    key={order.id}
+                    className="flex items-center justify-between p-3 bg-slate-50 rounded-lg border border-slate-100"
+                  >
                     <div>
                       <p className="font-medium text-slate-900">{order.customerName}</p>
                       <p className="text-sm text-slate-500">
@@ -121,17 +124,19 @@ export function Overview() {
           </CardContent>
         </Card>
 
-        {/* Popular Products */}
-        <Card className="border-0 shadow-sm">
+        <Card className="border border-slate-200 shadow-sm">
           <CardHeader>
-            <CardTitle className="text-lg">Histoires Populaires</CardTitle>
-            <CardDescription>Vos histoires les mieux valorisées</CardDescription>
+            <CardTitle className="text-lg">Dernières Histoires Ajoutées</CardTitle>
+            <CardDescription>Les histoires récemment ajoutées à votre catalogue</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              {popularProducts.length > 0 ? (
-                popularProducts.map((product) => (
-                  <div key={product.id} className="flex items-center space-x-3 p-3 bg-slate-50 rounded-lg">
+            <div className="space-y-3">
+              {latestProducts.length > 0 ? (
+                latestProducts.map((product) => (
+                  <div
+                    key={product.id}
+                    className="flex items-center space-x-3 p-3 bg-slate-50 rounded-lg border border-slate-100"
+                  >
                     <img
                       src={product.image || "/placeholder.svg"}
                       alt={product.name}

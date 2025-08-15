@@ -15,7 +15,7 @@ import Image from "next/image"
 
 export default function AdminDashboard() {
   const router = useRouter()
-  const [activeTab, setActiveTab] = useState("apercu")
+  const [activeTab, setActiveTab] = useState("overview")
 
   useEffect(() => {
     if (!isAuthenticated()) {
@@ -34,88 +34,87 @@ export default function AdminDashboard() {
 
   return (
     <AdminProvider>
-      <div className="min-h-screen bg-slate-50">
-        {/* Header */}
-        <header className="bg-white border-b border-slate-200 px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Image src="/logo.png" alt="Kids Story Time" width={120} height={40} className="h-10 w-auto" />
-              <div className="h-6 w-px bg-slate-300" />
-              <h1 className="text-xl font-semibold text-slate-900">Administration Kids Story Time</h1>
+      <div className="h-screen bg-slate-50 flex">
+        <aside className="w-64 bg-white border-r border-slate-200 flex flex-col h-full">
+          <div className="p-4 border-b border-slate-200">
+            <Image src="/logo.png" alt="Kids Story Time" width={120} height={40} className="h-10 w-auto" />
+          </div>
+
+          <nav className="p-4 flex-1">
+            <div className="space-y-2">
+              <Button
+                variant={activeTab === "overview" ? "default" : "ghost"}
+                className={`w-full justify-start ${
+                  activeTab === "overview" ? "bg-primary hover:bg-primary/90" : "hover:bg-slate-100"
+                }`}
+                onClick={() => setActiveTab("overview")}
+              >
+                <BarChart3 className="h-4 w-4 mr-3" />
+                Vue d'ensemble
+              </Button>
+              <Button
+                variant={activeTab === "products" ? "default" : "ghost"}
+                className={`w-full justify-start ${
+                  activeTab === "products" ? "bg-primary hover:bg-primary/90" : "hover:bg-slate-100"
+                }`}
+                onClick={() => setActiveTab("products")}
+              >
+                <Package className="h-4 w-4 mr-3" />
+                Histoires
+              </Button>
+              <Button
+                variant={activeTab === "orders" ? "default" : "ghost"}
+                className={`w-full justify-start ${
+                  activeTab === "orders" ? "bg-primary hover:bg-primary/90" : "hover:bg-slate-100"
+                }`}
+                onClick={() => setActiveTab("orders")}
+              >
+                <ClipboardList className="h-4 w-4 mr-3" />
+                Commandes
+              </Button>
+              <Button
+                variant={activeTab === "apercu" ? "default" : "ghost"}
+                className={`w-full justify-start ${
+                  activeTab === "apercu" ? "bg-primary hover:bg-primary/90" : "hover:bg-slate-100"
+                }`}
+                onClick={() => setActiveTab("apercu")}
+              >
+                <BarChart3 className="h-4 w-4 mr-3" />
+                Aperçu
+              </Button>
+              <Button
+                variant={activeTab === "subscribers" ? "default" : "ghost"}
+                className={`w-full justify-start ${
+                  activeTab === "subscribers" ? "bg-primary hover:bg-primary/90" : "hover:bg-slate-100"
+                }`}
+                onClick={() => setActiveTab("subscribers")}
+              >
+                <Users className="h-4 w-4 mr-3" />
+                Abonnés
+              </Button>
             </div>
+          </nav>
+          <div className="p-4 border-t border-slate-200">
             <Button
               variant="outline"
               onClick={handleLogout}
-              className="text-slate-600 hover:text-slate-900 bg-transparent"
+              className="w-full justify-start bg-red-500 hover:bg-red-600 text-white border-red-500 hover:border-red-600"
             >
-              <LogOut className="h-4 w-4 mr-2" />
+              <LogOut className="h-4 w-4 mr-3" />
               Déconnexion
             </Button>
           </div>
-        </header>
+        </aside>
 
-        {/* Main Content */}
-        <div className="flex">
-          {/* Sidebar */}
-          <aside className="w-64 bg-white border-r border-slate-200 min-h-[calc(100vh-73px)]">
-            <nav className="p-4">
-              <div className="space-y-2">
-                <Button
-                  variant={activeTab === "apercu" ? "default" : "ghost"}
-                  className={`w-full justify-start ${
-                    activeTab === "apercu" ? "bg-primary hover:bg-primary/90" : "hover:bg-slate-100"
-                  }`}
-                  onClick={() => setActiveTab("apercu")}
-                >
-                  <BarChart3 className="h-4 w-4 mr-3" />
-                  Aperçu
-                </Button>
-                <Button
-                  variant={activeTab === "overview" ? "default" : "ghost"}
-                  className={`w-full justify-start ${
-                    activeTab === "overview" ? "bg-primary hover:bg-primary/90" : "hover:bg-slate-100"
-                  }`}
-                  onClick={() => setActiveTab("overview")}
-                >
-                  <BarChart3 className="h-4 w-4 mr-3" />
-                  Vue d'ensemble
-                </Button>
-                <Button
-                  variant={activeTab === "subscribers" ? "default" : "ghost"}
-                  className={`w-full justify-start ${
-                    activeTab === "subscribers" ? "bg-primary hover:bg-primary/90" : "hover:bg-slate-100"
-                  }`}
-                  onClick={() => setActiveTab("subscribers")}
-                >
-                  <Users className="h-4 w-4 mr-3" />
-                  Abonnés
-                </Button>
-                <Button
-                  variant={activeTab === "products" ? "default" : "ghost"}
-                  className={`w-full justify-start ${
-                    activeTab === "products" ? "bg-primary hover:bg-primary/90" : "hover:bg-slate-100"
-                  }`}
-                  onClick={() => setActiveTab("products")}
-                >
-                  <Package className="h-4 w-4 mr-3" />
-                  Histoires
-                </Button>
-                <Button
-                  variant={activeTab === "orders" ? "default" : "ghost"}
-                  className={`w-full justify-start ${
-                    activeTab === "orders" ? "bg-primary hover:bg-primary/90" : "hover:bg-slate-100"
-                  }`}
-                  onClick={() => setActiveTab("orders")}
-                >
-                  <ClipboardList className="h-4 w-4 mr-3" />
-                  Commandes
-                </Button>
-              </div>
-            </nav>
-          </aside>
+        <div className="flex-1 flex flex-col">
+          <header className="bg-white border-b border-slate-200 px-6 py-4 flex-shrink-0">
+            <div className="flex items-center justify-end">
+              <h1 className="text-xl font-semibold text-slate-900">Administration</h1>
+            </div>
+          </header>
 
           {/* Content */}
-          <main className="flex-1">
+          <main className="flex-1 overflow-auto">
             {activeTab === "apercu" && <Apercu />}
             {activeTab === "overview" && <Overview />}
             {activeTab === "subscribers" && <Subscribers />}

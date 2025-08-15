@@ -6,30 +6,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Switch } from "@/components/ui/switch"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+import { Card, CardContent } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
-import { Plus, Edit, Trash2, ImageIcon, X } from "lucide-react"
+import { Plus, Edit, Trash2, ImageIcon, X, ArrowLeft, Star } from "lucide-react"
 import { useAdmin } from "@/lib/admin-context"
 import type { AdminProduct } from "@/lib/admin-context"
 import { useToast } from "@/hooks/use-toast"
@@ -37,8 +17,7 @@ import { useToast } from "@/hooks/use-toast"
 export function Products() {
   const { state, addProduct, updateProduct, deleteProduct } = useAdmin()
   const { toast } = useToast()
-  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
-  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
+  const [currentView, setCurrentView] = useState<"list" | "add" | "edit">("list")
   const [editingProduct, setEditingProduct] = useState<AdminProduct | null>(null)
   const [formData, setFormData] = useState({
     name: "",
@@ -50,12 +29,11 @@ export function Products() {
     category: "",
     inStock: true,
     description: "",
+    isSpecial: false,
   })
   const [isUploading, setIsUploading] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const additionalImagesInputRef = useRef<HTMLInputElement>(null)
-  const editFileInputRef = useRef<HTMLInputElement>(null)
-  const editAdditionalImagesInputRef = useRef<HTMLInputElement>(null)
 
   const ageOptions = [
     { value: "0-2 ans", label: "0-2 ans" },
@@ -184,11 +162,10 @@ export function Products() {
       category: "",
       inStock: true,
       description: "",
+      isSpecial: false,
     })
     if (fileInputRef.current) fileInputRef.current.value = ""
     if (additionalImagesInputRef.current) additionalImagesInputRef.current.value = ""
-    if (editFileInputRef.current) editFileInputRef.current.value = ""
-    if (editAdditionalImagesInputRef.current) editAdditionalImagesInputRef.current.value = ""
   }
 
   const validateForm = () => {
@@ -237,6 +214,19 @@ export function Products() {
       return false
     }
 
+    // Check special stories limit
+    const currentSpecialCount = state.products.filter(
+      (p) => p.isSpecial && (!editingProduct || p.id !== editingProduct.id),
+    ).length
+    if (formData.isSpecial && currentSpecialCount >= 4) {
+      toast({
+        title: "Erreur",
+        description: "Vous ne pouvez avoir que 4 histoires spéciales maximum.",
+        variant: "destructive",
+      })
+      return false
+    }
+
     return true
   }
 
@@ -254,9 +244,10 @@ export function Products() {
       category: formData.category.trim(),
       inStock: formData.inStock,
       description: formData.description.trim(),
+      isSpecial: formData.isSpecial,
     })
     resetForm()
-    setIsAddDialogOpen(false)
+    setCurrentView("list")
     toast({
       title: "Succès",
       description: "Histoire ajoutée avec succès.",
@@ -276,8 +267,9 @@ export function Products() {
       category: product.category,
       inStock: product.inStock,
       description: product.description || "",
+      isSpecial: product.isSpecial || false,
     })
-    setIsEditDialogOpen(true)
+    setCurrentView("edit")
   }
 
   const handleUpdate = () => {
@@ -295,10 +287,11 @@ export function Products() {
       category: formData.category.trim(),
       inStock: formData.inStock,
       description: formData.description.trim(),
+      isSpecial: formData.isSpecial,
     })
     resetForm()
     setEditingProduct(null)
-    setIsEditDialogOpen(false)
+    setCurrentView("list")
     toast({
       title: "Succès",
       description: "Histoire mise à jour avec succès.",
@@ -313,25 +306,36 @@ export function Products() {
     })
   }
 
-  return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-8">
-        <div>
-          <h2 className="text-3xl font-bold text-slate-900 mb-2">Histoires</h2>
-          <p className="text-slate-600">Gérez votre catalogue d'histoires personnalisées</p>
+  const specialStoriesCount = state.products.filter((p) => p.isSpecial).length
+
+  if (currentView === "add" || currentView === "edit") {
+    return (
+      <div className="p-4">
+        <div className="mb-4">
+          <Button
+            variant="ghost"
+            onClick={() => {
+              resetForm()
+              setEditingProduct(null)
+              setCurrentView("list")
+            }}
+            className="mb-4"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Retour
+          </Button>
+          <h2 className="text-3xl font-bold text-slate-900 mb-2">
+            {currentView === "add" ? "Ajouter une histoire" : "Modifier l'histoire"}
+          </h2>
+          <p className="text-slate-600">
+            {currentView === "add"
+              ? "Créez une nouvelle histoire personnalisée"
+              : "Modifiez les informations de cette histoire"}
+          </p>
         </div>
-        <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
-          <DialogTrigger asChild>
-            <Button className="bg-primary hover:bg-primary/90">
-              <Plus className="h-4 w-4 mr-2" />
-              Ajouter une histoire
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>Ajouter une nouvelle histoire</DialogTitle>
-              <DialogDescription>Créez une nouvelle histoire personnalisée pour votre catalogue.</DialogDescription>
-            </DialogHeader>
+
+        <Card className="border border-slate-200 shadow-sm">
+          <CardContent className="p-4">
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -354,7 +358,7 @@ export function Products() {
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-3 gap-4">
                 <div>
                   <Label htmlFor="oldPrice">Ancien prix (DH)</Label>
                   <Input
@@ -367,11 +371,12 @@ export function Products() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <Switch
-                    id="inStock"
-                    checked={formData.inStock}
-                    onCheckedChange={(checked) => setFormData({ ...formData, inStock: checked })}
+                    id="isSpecial"
+                    checked={formData.isSpecial}
+                    onCheckedChange={(checked) => setFormData({ ...formData, isSpecial: checked })}
+                    disabled={!formData.isSpecial && specialStoriesCount >= 4}
                   />
-                  <Label htmlFor="inStock">En stock</Label>
+                  <Label htmlFor="isSpecial">Histoire spéciale ({specialStoriesCount}/4)</Label>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -470,87 +475,142 @@ export function Products() {
                   rows={3}
                 />
               </div>
+              <div className="flex space-x-2 pt-4">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    resetForm()
+                    setEditingProduct(null)
+                    setCurrentView("list")
+                  }}
+                >
+                  Annuler
+                </Button>
+                <Button
+                  onClick={currentView === "add" ? handleAdd : handleUpdate}
+                  disabled={isUploading}
+                  className="bg-primary hover:bg-primary/90"
+                >
+                  {isUploading ? "Téléchargement..." : currentView === "add" ? "Ajouter" : "Mettre à jour"}
+                </Button>
+              </div>
             </div>
-            <DialogFooter>
-              <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>
-                Annuler
-              </Button>
-              <Button onClick={handleAdd} disabled={isUploading} className="bg-primary hover:bg-primary/90">
-                {isUploading ? "Téléchargement..." : "Ajouter"}
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
+  return (
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-4">
+        <div>
+          <h2 className="text-3xl font-bold text-slate-900 mb-2">Histoires</h2>
+          <p className="text-slate-600">Gérez votre catalogue d'histoires personnalisées</p>
+        </div>
+        <Button
+          className="bg-primary hover:bg-primary/90"
+          onClick={() => {
+            resetForm()
+            setCurrentView("add")
+          }}
+        >
+          <Plus className="h-4 w-4 mr-2" />
+          Ajouter une histoire
+        </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {state.products.map((product) => (
-          <Card key={product.id} className="border-0 shadow-sm">
-            <CardHeader className="pb-3">
-              <div className="relative w-full h-48 bg-slate-100 rounded-lg overflow-hidden mb-3">
-                {product.image ? (
-                  <img
-                    src={product.image || "/placeholder.svg"}
-                    alt={product.name}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <ImageIcon className="h-8 w-8 text-slate-400" />
-                  </div>
-                )}
-              </div>
-              <CardTitle className="text-lg">{product.name}</CardTitle>
-              <CardDescription className="space-y-2">
-                <div className="flex items-center space-x-2">
-                  <Badge variant="secondary">{product.age}</Badge>
-                  <Badge variant="outline">{product.category}</Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <span className="text-lg font-semibold text-slate-900">{product.price} DH</span>
-                    {product.oldPrice > product.price && (
-                      <span className="text-sm text-slate-500 line-through ml-2">{product.oldPrice} DH</span>
-                    )}
-                  </div>
-                </div>
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <div className="flex space-x-2">
-                <Button variant="outline" size="sm" onClick={() => handleEdit(product)} className="flex-1">
-                  <Edit className="h-4 w-4 mr-2" />
-                  Modifier
-                </Button>
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700 bg-transparent">
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Supprimer l'histoire</AlertDialogTitle>
-                      <AlertDialogDescription>
-                        Êtes-vous sûr de vouloir supprimer cette histoire ? Cette action est irréversible.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Annuler</AlertDialogCancel>
-                      <AlertDialogAction
-                        onClick={() => handleDelete(product.id)}
-                        className="bg-red-600 hover:bg-red-700"
-                      >
-                        Supprimer
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      {/* Special Stories Info */}
+      <Card className="border border-slate-200 shadow-sm mb-4">
+        <CardContent className="p-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <Star className="h-4 w-4 text-yellow-500" />
+              <span className="text-sm font-medium">Histoires spéciales: {specialStoriesCount}/4</span>
+            </div>
+            <p className="text-xs text-slate-500">Les histoires spéciales apparaissent en vedette sur le site</p>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Table Layout */}
+      <Card className="border border-slate-200 shadow-sm">
+        <CardContent className="p-0">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-slate-50 border-b border-slate-200">
+                <tr>
+                  <th className="text-left p-3 font-medium text-slate-600">Histoire</th>
+                  <th className="text-left p-3 font-medium text-slate-600">Détails</th>
+                  <th className="text-right p-3 font-medium text-slate-600">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {state.products.map((product) => (
+                  <tr key={product.id} className="border-b border-slate-100 hover:bg-slate-50">
+                    <td className="p-3">
+                      <div className="flex items-center space-x-3">
+                        <div className="relative w-16 h-16 bg-slate-100 rounded-lg overflow-hidden flex-shrink-0">
+                          {product.image ? (
+                            <img
+                              src={product.image || "/placeholder.svg"}
+                              alt={product.name}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center">
+                              <ImageIcon className="h-6 w-6 text-slate-400" />
+                            </div>
+                          )}
+                          {product.isSpecial && (
+                            <div className="absolute top-1 right-1">
+                              <Star className="h-3 w-3 text-yellow-500 fill-current" />
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <h3 className="font-medium text-slate-900">{product.name}</h3>
+                          <p className="text-sm text-slate-500">{product.description?.substring(0, 50)}...</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="p-3">
+                      <div className="space-y-1">
+                        <div className="flex items-center space-x-2">
+                          <Badge variant="secondary">{product.age}</Badge>
+                          <Badge variant="outline">{product.category}</Badge>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <span className="font-semibold text-slate-900">{product.price} DH</span>
+                          {product.oldPrice > product.price && (
+                            <span className="text-sm text-slate-500 line-through">{product.oldPrice} DH</span>
+                          )}
+                        </div>
+                      </div>
+                    </td>
+                    <td className="p-3">
+                      <div className="flex justify-end space-x-2">
+                        <Button variant="outline" size="sm" onClick={() => handleEdit(product)}>
+                          <Edit className="h-4 w-4 mr-2" />
+                          Modifier
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="text-red-600 hover:text-red-700 bg-transparent"
+                          onClick={() => handleDelete(product.id)}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </CardContent>
+      </Card>
 
       {state.products.length === 0 && (
         <div className="text-center py-12">
@@ -559,163 +619,6 @@ export function Products() {
           <p className="text-slate-500">Commencez par ajouter votre première histoire.</p>
         </div>
       )}
-
-      {/* Edit Dialog */}
-      <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>Modifier l'histoire</DialogTitle>
-            <DialogDescription>Modifiez les informations de cette histoire.</DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="edit-name">Nom de l'histoire</Label>
-                <Input
-                  id="edit-name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="Ex: L'Aventure de Luna"
-                />
-              </div>
-              <div>
-                <Label htmlFor="edit-price">Prix (DH)</Label>
-                <Input
-                  id="edit-price"
-                  type="number"
-                  value={formData.price}
-                  onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                  placeholder="45"
-                />
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="edit-oldPrice">Ancien prix (DH)</Label>
-                <Input
-                  id="edit-oldPrice"
-                  type="number"
-                  value={formData.oldPrice}
-                  onChange={(e) => setFormData({ ...formData, oldPrice: e.target.value })}
-                  placeholder="55"
-                />
-              </div>
-              <div className="flex items-center space-x-2">
-                <Switch
-                  id="edit-inStock"
-                  checked={formData.inStock}
-                  onCheckedChange={(checked) => setFormData({ ...formData, inStock: checked })}
-                />
-                <Label htmlFor="edit-inStock">En stock</Label>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="edit-age">Âge recommandé</Label>
-                <Select value={formData.age} onValueChange={(value) => setFormData({ ...formData, age: value })}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Sélectionner l'âge" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {ageOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Label htmlFor="edit-category">Catégorie</Label>
-                <Input
-                  id="edit-category"
-                  value={formData.category}
-                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  placeholder="Ex: Aventure, Amitié, Exploration"
-                />
-              </div>
-            </div>
-            <div>
-              <Label htmlFor="edit-image">Image principale</Label>
-              <div className="space-y-2">
-                <Input
-                  ref={editFileInputRef}
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0]
-                    if (file) handleImageUpload(file, true)
-                  }}
-                  disabled={isUploading}
-                />
-                {formData.image && (
-                  <div className="relative w-32 h-32 bg-slate-100 rounded-lg overflow-hidden">
-                    <img
-                      src={formData.image || "/placeholder.svg"}
-                      alt="Preview"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
-            <div>
-              <Label htmlFor="edit-additional-images">Images supplémentaires</Label>
-              <div className="space-y-2">
-                <Input
-                  ref={editAdditionalImagesInputRef}
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  onChange={(e) => {
-                    const files = e.target.files
-                    if (files && files.length > 0) handleMultipleImagesUpload(files)
-                  }}
-                  disabled={isUploading}
-                />
-                {formData.images.length > 0 && (
-                  <div className="grid grid-cols-4 gap-2">
-                    {formData.images.map((image, index) => (
-                      <div key={index} className="relative w-20 h-20 bg-slate-100 rounded-lg overflow-hidden">
-                        <img
-                          src={image || "/placeholder.svg"}
-                          alt={`Preview ${index + 1}`}
-                          className="w-full h-full object-cover"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => removeImage(index)}
-                          className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs hover:bg-red-600"
-                        >
-                          <X className="h-3 w-3" />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-            <div>
-              <Label htmlFor="edit-description">Description</Label>
-              <Textarea
-                id="edit-description"
-                value={formData.description}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                placeholder="Description de l'histoire..."
-                rows={3}
-              />
-            </div>
-          </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
-              Annuler
-            </Button>
-            <Button onClick={handleUpdate} disabled={isUploading} className="bg-primary hover:bg-primary/90">
-              {isUploading ? "Téléchargement..." : "Mettre à jour"}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </div>
   )
 }

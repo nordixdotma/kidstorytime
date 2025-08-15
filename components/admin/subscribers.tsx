@@ -50,8 +50,8 @@ export function Subscribers() {
   }
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-8">
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-4">
         <div>
           <h2 className="text-3xl font-bold text-slate-900 mb-2">Abonnés</h2>
           <p className="text-slate-600">Gérez la liste des abonnés à votre newsletter</p>
@@ -62,7 +62,7 @@ export function Subscribers() {
         </Button>
       </div>
 
-      <Card className="border-0 shadow-sm">
+      <Card className="border border-slate-200 shadow-sm">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
@@ -81,36 +81,50 @@ export function Subscribers() {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="space-y-3">
-            {filteredSubscribers.length > 0 ? (
-              filteredSubscribers.map((subscriber) => (
-                <div key={subscriber.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-                      <Users className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-medium text-slate-900">{subscriber.email}</p>
-                      <p className="text-sm text-slate-500">
-                        Inscrit le {new Date(subscriber.subscribedAt).toLocaleDateString("fr-FR")}
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-slate-50 border-b border-slate-200">
+                <tr>
+                  <th className="text-left p-3 font-medium text-slate-600">Email</th>
+                  <th className="text-left p-3 font-medium text-slate-600">Date d'inscription</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredSubscribers.length > 0 ? (
+                  filteredSubscribers.map((subscriber) => (
+                    <tr key={subscriber.id} className="border-b border-slate-100 hover:bg-slate-50">
+                      <td className="p-3">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                            <Users className="h-4 w-4 text-primary" />
+                          </div>
+                          <span className="font-medium text-slate-900">{subscriber.email}</span>
+                        </div>
+                      </td>
+                      <td className="p-3">
+                        <span className="text-slate-600">
+                          {new Date(subscriber.subscribedAt).toLocaleDateString("fr-FR")}
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={2} className="text-center py-8">
+                      <Users className="h-12 w-12 text-slate-400 mx-auto mb-4" />
+                      <h3 className="text-lg font-medium text-slate-900 mb-2">
+                        {searchTerm ? "Aucun résultat" : "Aucun abonné"}
+                      </h3>
+                      <p className="text-slate-500">
+                        {searchTerm
+                          ? "Aucun abonné ne correspond à votre recherche."
+                          : "Les abonnés à votre newsletter apparaîtront ici."}
                       </p>
-                    </div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="text-center py-8">
-                <Users className="h-12 w-12 text-slate-400 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-slate-900 mb-2">
-                  {searchTerm ? "Aucun résultat" : "Aucun abonné"}
-                </h3>
-                <p className="text-slate-500">
-                  {searchTerm
-                    ? "Aucun abonné ne correspond à votre recherche."
-                    : "Les abonnés à votre newsletter apparaîtront ici."}
-                </p>
-              </div>
-            )}
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
         </CardContent>
       </Card>

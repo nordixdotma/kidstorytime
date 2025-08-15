@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Eye, Phone, Mail, MapPin, Package } from "lucide-react"
+import { Eye, Phone, Mail, MapPin, Package, Download } from "lucide-react"
 import { useAdmin } from "@/lib/admin-context"
 import type { Order } from "@/lib/admin-context"
 import { useToast } from "@/hooks/use-toast"
@@ -74,17 +74,73 @@ export function Orders() {
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
   )
 
+  const exportToCSV = () => {
+    const csvContent = [
+      [
+        "ID",
+        "Client",
+        "Email",
+        "Téléphone",
+        "Statut",
+        "Total",
+        "Date",
+        "Commentaire",
+        "Code Promo",
+        "Dédicace",
+        "Prénom Enfant",
+        "Genre Enfant",
+      ],
+      ...sortedOrders.map((order) => [
+        order.id.toString(),
+        order.customerName,
+        order.customerEmail,
+        order.customerPhone || "",
+        getStatusLabel(order.status),
+        `${order.totalPrice} DH`,
+        formatDate(order.createdAt),
+        order.commentaire || "",
+        order.codePromo || "",
+        order.dedicaceNumber?.toString() || "",
+        order.enfantPrenom || "",
+        order.enfantGenre || "",
+      ]),
+    ]
+      .map((row) => row.join(","))
+      .join("\n")
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" })
+    const link = document.createElement("a")
+    const url = URL.createObjectURL(blob)
+    link.setAttribute("href", url)
+    link.setAttribute("download", `commandes_kidstorytime_${new Date().toISOString().split("T")[0]}.csv`)
+    link.style.visibility = "hidden"
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+
+    toast({
+      title: "Succès",
+      description: "Liste des commandes exportée avec succès.",
+    })
+  }
+
   return (
-    <div className="p-6">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-slate-900 mb-2">Commandes</h2>
-        <p className="text-slate-600">Gérez les commandes de vos clients</p>
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-4">
+        <div>
+          <h2 className="text-3xl font-bold text-slate-900 mb-2">Commandes</h2>
+          <p className="text-slate-600">Gérez les commandes de vos clients</p>
+        </div>
+        <Button onClick={exportToCSV} className="bg-primary hover:bg-primary/90">
+          <Download className="h-4 w-4 mr-2" />
+          Exporter CSV
+        </Button>
       </div>
 
       <div className="space-y-4">
         {sortedOrders.length > 0 ? (
           sortedOrders.map((order) => (
-            <Card key={order.id} className="border-0 shadow-sm">
+            <Card key={order.id} className="border border-slate-200 shadow-sm">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
@@ -164,11 +220,11 @@ export function Orders() {
             </DialogDescription>
           </DialogHeader>
           {selectedOrder && (
-            <div className="space-y-6">
+            <div className="space-y-4">
               {/* Customer Information */}
-              <div className="bg-slate-50 p-4 rounded-lg">
-                <h3 className="font-semibold text-slate-900 mb-3">Informations client</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                <h3 className="font-semibold text-slate-900 mb-2">Informations client</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
                   <div className="flex items-center space-x-2">
                     <Phone className="h-4 w-4 text-slate-500" />
                     <span className="font-medium">Nom:</span>
@@ -205,6 +261,41 @@ export function Orders() {
                       <span>{selectedOrder.pays}</span>
                     </div>
                   )}
+                  {selectedOrder.commentaire && (
+                    <div className="col-span-2 flex items-start space-x-2">
+                      <Mail className="h-4 w-4 text-slate-500 mt-0.5" />
+                      <span className="font-medium">Commentaire:</span>
+                      <span>{selectedOrder.commentaire}</span>
+                    </div>
+                  )}
+                  {selectedOrder.codePromo && (
+                    <div className="flex items-center space-x-2">
+                      <Package className="h-4 w-4 text-slate-500" />
+                      <span className="font-medium">Code promo:</span>
+                      <span>{selectedOrder.codePromo}</span>
+                    </div>
+                  )}
+                  {selectedOrder.dedicaceNumber && (
+                    <div className="flex items-center space-x-2">
+                      <Package className="h-4 w-4 text-slate-500" />
+                      <span className="font-medium">Dédicace:</span>
+                      <span>#{selectedOrder.dedicaceNumber}</span>
+                    </div>
+                  )}
+                  {selectedOrder.enfantPrenom && (
+                    <div className="flex items-center space-x-2">
+                      <Phone className="h-4 w-4 text-slate-500" />
+                      <span className="font-medium">Prénom enfant:</span>
+                      <span>{selectedOrder.enfantPrenom}</span>
+                    </div>
+                  )}
+                  {selectedOrder.enfantGenre && (
+                    <div className="flex items-center space-x-2">
+                      <Phone className="h-4 w-4 text-slate-500" />
+                      <span className="font-medium">Genre:</span>
+                      <span>{selectedOrder.enfantGenre}</span>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -224,10 +315,13 @@ export function Orders() {
 
               {/* Order Items */}
               <div>
-                <h3 className="font-semibold text-slate-900 mb-3">Articles commandés</h3>
+                <h3 className="font-semibold text-slate-900 mb-2">Articles commandés</h3>
                 <div className="space-y-3">
                   {selectedOrder.items.map((item, index) => (
-                    <div key={index} className="flex items-center space-x-4 p-3 bg-slate-50 rounded-lg">
+                    <div
+                      key={index}
+                      className="flex items-center space-x-4 p-3 bg-slate-50 rounded-lg border border-slate-100"
+                    >
                       <img
                         src={item.image || "/placeholder.svg"}
                         alt={item.name}
@@ -250,7 +344,7 @@ export function Orders() {
               </div>
 
               {/* Order Summary */}
-              <div className="border-t pt-4">
+              <div className="border-t pt-3">
                 <div className="flex justify-between items-center">
                   <span className="font-semibold text-slate-900">Total de la commande</span>
                   <span className="text-xl font-bold text-slate-900">{selectedOrder.totalPrice} DH</span>

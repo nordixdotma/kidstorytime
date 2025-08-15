@@ -147,19 +147,6 @@ export default function CartModal() {
               <div className="p-4 bg-gray-50">
                 <form className="space-y-3">
                   <div>
-                    <label htmlFor="promoCode" className="block text-sm font-black text-gray-700 mb-1">
-                      Code promo
-                    </label>
-                    <input
-                      type="text"
-                      id="promoCode"
-                      name="promoCode"
-                      placeholder="Entrez votre code promo"
-                      className="w-full px-3 py-2 text-sm border border-gray-300 focus:outline-none focus:ring-1 focus:ring-[#d88200] focus:border-[#d88200] font-normal"
-                    />
-                  </div>
-
-                  <div>
                     <label htmlFor="fullName" className="block text-sm font-black text-gray-700 mb-1">
                       Nom complet *
                     </label>
@@ -207,36 +194,38 @@ export default function CartModal() {
                     />
                   </div>
 
-                  <div>
-                    <label htmlFor="city" className="block text-sm font-black text-gray-700 mb-1">
-                      Ville *
-                    </label>
-                    <input
-                      type="text"
-                      id="city"
-                      name="city"
-                      value={formData.city}
-                      onChange={handleInputChange}
-                      placeholder="Votre ville"
-                      className="w-full px-3 py-2 text-sm border border-gray-300 focus:outline-none focus:ring-1 focus:ring-[#d88200] focus:border-[#d88200] font-normal"
-                      required
-                    />
-                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label htmlFor="city" className="block text-sm font-black text-gray-700 mb-1">
+                        Ville *
+                      </label>
+                      <input
+                        type="text"
+                        id="city"
+                        name="city"
+                        value={formData.city}
+                        onChange={handleInputChange}
+                        placeholder="Votre ville"
+                        className="w-full px-3 py-2 text-sm border border-gray-300 focus:outline-none focus:ring-1 focus:ring-[#d88200] focus:border-[#d88200] font-normal"
+                        required
+                      />
+                    </div>
 
-                  <div>
-                    <label htmlFor="country" className="block text-sm font-black text-gray-700 mb-1">
-                      Pays *
-                    </label>
-                    <input
-                      type="text"
-                      id="country"
-                      name="country"
-                      value={formData.country}
-                      onChange={handleInputChange}
-                      placeholder="Votre pays"
-                      className="w-full px-3 py-2 text-sm border border-gray-300 focus:outline-none focus:ring-1 focus:ring-[#d88200] focus:border-[#d88200] font-normal"
-                      required
-                    />
+                    <div>
+                      <label htmlFor="country" className="block text-sm font-black text-gray-700 mb-1">
+                        Pays *
+                      </label>
+                      <input
+                        type="text"
+                        id="country"
+                        name="country"
+                        value={formData.country}
+                        onChange={handleInputChange}
+                        placeholder="Votre pays"
+                        className="w-full px-3 py-2 text-sm border border-gray-300 focus:outline-none focus:ring-1 focus:ring-[#d88200] focus:border-[#d88200] font-normal"
+                        required
+                      />
+                    </div>
                   </div>
 
                   <div>
@@ -356,6 +345,22 @@ export default function CartModal() {
                     </li>
                   ))}
                 </ul>
+              </div>
+
+              {/* Promo code section before checkout button */}
+              <div className="border-t border-gray-200 p-4 bg-gray-50">
+                <div>
+                  <label htmlFor="promoCode" className="block text-sm font-black text-gray-700 mb-1">
+                    Code promo
+                  </label>
+                  <input
+                    type="text"
+                    id="promoCode"
+                    name="promoCode"
+                    placeholder="Entrez votre code promo"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 focus:outline-none focus:ring-1 focus:ring-[#d88200] focus:border-[#d88200] font-normal"
+                  />
+                </div>
               </div>
 
               <div className="border-t border-gray-200 p-4 bg-white mt-auto">

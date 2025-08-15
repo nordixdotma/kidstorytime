@@ -54,7 +54,7 @@ export default function AdminLogin() {
         </CardHeader>
 
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <Alert variant="destructive" className="bg-red-50 border-red-200">
                 <AlertDescription className="text-red-800">{error}</AlertDescription>

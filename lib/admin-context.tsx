@@ -17,9 +17,10 @@ export interface Type {
   image: string
 }
 
-export interface AdminProduct extends Omit<Product, "category" | "type"> {
+export interface AdminProduct extends Omit<Product, "category" | "type" | "inStock"> {
   age: number
   category: string
+  isSpecial?: boolean
 }
 
 export interface Order {
@@ -34,6 +35,11 @@ export interface Order {
   address?: string
   ville?: string
   pays?: string
+  codePromo?: string
+  commentaire?: string
+  dedicace?: number
+  enfantPrenom?: string
+  genre?: "fille" | "garcon"
 }
 
 interface AdminState {
@@ -69,7 +75,7 @@ const initialState: AdminState = {
       images: ["/p1.avif"],
       age: 4,
       category: "Aventure",
-      inStock: true,
+      isSpecial: true,
       description: "Une histoire magique personnalisée où votre enfant accompagne Luna dans ses aventures enchantées.",
     },
     {
@@ -81,7 +87,7 @@ const initialState: AdminState = {
       images: ["/t1.avif"],
       age: 5,
       category: "Exploration",
-      inStock: true,
+      isSpecial: false,
       description:
         "Rejoignez Max dans un voyage extraordinaire à travers des terres mystérieuses et des découvertes incroyables.",
     },
@@ -94,7 +100,7 @@ const initialState: AdminState = {
       images: ["/t2.avif"],
       age: 3,
       category: "Amitié",
-      inStock: true,
+      isSpecial: true,
       description: "Une belle histoire sur l'amitié et la nature, où votre enfant rencontre des animaux magiques.",
     },
   ],
@@ -124,6 +130,11 @@ const initialState: AdminState = {
       address: "Rue des Roses, Quartier Gueliz",
       ville: "Marrakech",
       pays: "Maroc",
+      codePromo: "WELCOME10",
+      commentaire: "Merci pour cette belle histoire personnalisée!",
+      dedicace: 3,
+      enfantPrenom: "Yasmine",
+      genre: "fille",
     },
     {
       id: 2,
@@ -150,6 +161,11 @@ const initialState: AdminState = {
       address: "Avenue Mohammed V",
       ville: "Casablanca",
       pays: "Maroc",
+      codePromo: "",
+      commentaire: "Livraison rapide s'il vous plaît",
+      dedicace: 1,
+      enfantPrenom: "Omar",
+      genre: "garcon",
     },
   ],
 }
