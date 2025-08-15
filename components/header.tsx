@@ -286,7 +286,7 @@ export default function Header({ forceWhite = false }: HeaderProps) {
                 <div className="flex flex-col h-full">
                   {/* Menu Header */}
                   <div className="flex justify-between items-center p-5 border-b border-gray-100">
-                    <img src="/fulllogo.png" alt="Kids Story Time Logo" className="h-12 w-auto" />
+                    <img src="/logo.png" alt="Kids Story Time Logo" className="h-12 w-auto" />
                     <button
                       onClick={() => setIsMenuOpen(false)}
                       className="p-2 hover:bg-[#d88200]/10 transition-colors"
