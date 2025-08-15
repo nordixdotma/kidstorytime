@@ -29,7 +29,7 @@ export default function TestimonialsSection() {
     },
     {
       quote:
-        "Ces histoires personnalisées ont complètement transformé notre routine du coucher. Mes jumeaux Salma et Karim adorent entendre leurs aventures ensemble comme explorateurs de l'espace et détectives sous-marins ! C'est vraiment magique de voir leurs visages s'illuminer.",
+        "Ces histoires personnalisées ont complètement transformé notre routine du coucher. Mes jumeaux Salma et Karim adorent entendre leurs aventures ensemble comme explorateurs de l'espace et détectives sous-marines ! C'est vraiment magique de voir leurs visages s'illuminer.",
       image:
         "https://plus.unsplash.com/premium_photo-1690294614341-cf346ba0a637?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D",
       name: "Fatima Zahra",
@@ -66,7 +66,7 @@ export default function TestimonialsSection() {
 
   return (
     <section id="testimonials" className="py-16 sm:py-24 relative overflow-hidden bg-white">
-      <div className="max-w-7xl mx-auto px-2 md:px-4 relative z-10">
+      <div className="max-w-7xl mx-auto px-1 sm:px-2 md:px-4 relative z-10 overflow-hidden">
         <div className="text-left mb-16">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl md:text-5xl mb-4">
             Ce que disent les <span className="text-[#d88200]">parents</span>
@@ -76,20 +76,20 @@ export default function TestimonialsSection() {
           </p>
         </div>
 
-        <div className="relative">
+        <div className="relative overflow-hidden">
           <Swiper
             modules={[Autoplay]}
             slidesPerView={1}
             centeredSlides={true}
-            spaceBetween={12}
+            spaceBetween={8}
             breakpoints={{
               640: {
                 slidesPerView: 1.5,
-                spaceBetween: 15,
+                spaceBetween: 12,
               },
               768: {
                 slidesPerView: 2,
-                spaceBetween: 18,
+                spaceBetween: 16,
               },
               1024: {
                 slidesPerView: 3,
@@ -117,11 +117,22 @@ export default function TestimonialsSection() {
       </div>
 
       <style jsx global>{`
+        .testimonial-swiper {
+          overflow: hidden;
+          width: 100%;
+        }
+        
+        .testimonial-swiper .swiper-wrapper {
+          align-items: stretch;
+        }
+        
         .testimonial-swiper .swiper-slide {
           transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
           transform: scale(0.95);
           height: auto;
           padding: 20px 0;
+          max-width: 100%;
+          box-sizing: border-box;
         }
         
         .testimonial-swiper .swiper-slide-active {
@@ -132,6 +143,11 @@ export default function TestimonialsSection() {
         @media (max-width: 767px) {
           .testimonial-swiper .swiper-slide {
             opacity: 1 !important;
+            transform: scale(1) !important;
+          }
+          
+          .testimonial-swiper .swiper-slide-active {
+            transform: scale(1) !important;
           }
         }
         
@@ -165,9 +181,8 @@ const TestimonialCard = ({ testimonial, isActive }: { testimonial: any; isActive
   const { quote, image, name, position, rating } = testimonial
 
   return (
-    <div className="relative px-2 py-1 flex flex-col h-full">
-      <div className="rounded-md bg-[#ffebcc] text-gray-900 p-6 shadow-lg relative w-full border border-gray-200 h-full flex flex-col hover:shadow-xl transition-shadow duration-300">
-        {/* Google-style header */}
+    <div className="relative px-1 sm:px-2 py-1 flex flex-col h-full box-border">
+      <div className="rounded-md bg-[#ffebcc] text-gray-900 p-4 sm:p-6 shadow-lg relative w-full border border-gray-200 h-full flex flex-col hover:shadow-xl transition-shadow duration-300 box-border">
         <div className="flex items-center mb-4">
           <div className="flex-shrink-0 w-12 h-12 rounded-full overflow-hidden mr-3">
             <img
@@ -214,7 +229,6 @@ const TestimonialCard = ({ testimonial, isActive }: { testimonial: any; isActive
           </div>
         </div>
 
-        {/* Review content */}
         <div className="relative flex-grow">
           <p className="text-sm leading-relaxed text-gray-600">{quote}</p>
         </div>
