@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Package, LogOut, BarChart3, Users, ClipboardList } from "lucide-react"
+import { Package, LogOut, BarChart3, Users, ClipboardList, Percent } from "lucide-react"
 import { isAuthenticated, logout } from "@/lib/auth"
 import { AdminProvider } from "@/lib/admin-context"
 import { Overview } from "@/components/admin/overview"
-import { Apercu } from "@/components/admin/apercu"
+import { CodePromos } from "@/components/admin/code-promos"
 import { Subscribers } from "@/components/admin/subscribers"
 import { Products } from "@/components/admin/products"
 import { Orders } from "@/components/admin/orders"
@@ -73,14 +73,14 @@ export default function AdminDashboard() {
                 Commandes
               </Button>
               <Button
-                variant={activeTab === "apercu" ? "default" : "ghost"}
+                variant={activeTab === "code-promos" ? "default" : "ghost"}
                 className={`w-full justify-start ${
-                  activeTab === "apercu" ? "bg-primary hover:bg-primary/90" : "hover:bg-slate-100"
+                  activeTab === "code-promos" ? "bg-primary hover:bg-primary/90" : "hover:bg-slate-100"
                 }`}
-                onClick={() => setActiveTab("apercu")}
+                onClick={() => setActiveTab("code-promos")}
               >
-                <BarChart3 className="h-4 w-4 mr-3" />
-                Aperçu
+                <Percent className="h-4 w-4 mr-3" />
+                Code Promos
               </Button>
               <Button
                 variant={activeTab === "subscribers" ? "default" : "ghost"}
@@ -115,7 +115,7 @@ export default function AdminDashboard() {
 
           {/* Content */}
           <main className="flex-1 overflow-auto">
-            {activeTab === "apercu" && <Apercu />}
+            {activeTab === "code-promos" && <CodePromos />}
             {activeTab === "overview" && <Overview />}
             {activeTab === "subscribers" && <Subscribers />}
             {activeTab === "products" && <Products />}

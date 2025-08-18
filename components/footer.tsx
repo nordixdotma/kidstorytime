@@ -23,11 +23,7 @@ export default function Footer() {
           {/* Brand Column */}
           <div>
             <Link href="/" className="inline-block">
-              <img
-                src="/logo.png"
-                alt="Kids Story Time Logo"
-                className="h-14 w-auto mb-4"
-              />
+              <img src="/logo.png" alt="Kids Story Time Logo" className="h-14 w-auto mb-4" />
             </Link>
             <p className="text-sm text-white/70">Créez des histoires personnalisées uniques pour vos enfants.</p>
           </div>
@@ -66,7 +62,7 @@ export default function Footer() {
                   href="https://www.facebook.com/profile.php?id=61568595925651"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors"
+                  className="w-8 h-8 flex items-center justify-center hover:bg-white/10 transition-colors"
                   aria-label="Facebook"
                 >
                   <Facebook size={16} className="text-white" />
@@ -75,7 +71,7 @@ export default function Footer() {
                   href="https://www.instagram.com/kids_storytime_24/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors"
+                  className="w-8 h-8 flex items-center justify-center hover:bg-white/10 transition-colors"
                   aria-label="Instagram"
                 >
                   <Instagram size={16} className="text-white" />
