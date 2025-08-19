@@ -54,9 +54,8 @@ export default function HomepageProductsSection() {
 
         <div className="text-center mt-8">
           <Link href="/boutique">
-            <button className="relative bg-[#d88200] text-white px-8 py-3 rounded-sm font-medium transition-colors duration-300 overflow-hidden group">
-              <span className="relative z-10 transition-colors duration-300 group-hover:text-white">Voir tous</span>
-              <div className="absolute inset-0 bg-black scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></div>
+            <button className="relative bg-[#f97316] text-white px-8 py-3 rounded-full font-medium transition-all duration-300 overflow-hidden group border-2 border-[#f97316] hover:bg-white hover:text-[#f97316]">
+              <span className="relative z-10 transition-colors duration-300">Voir tous</span>
             </button>
           </Link>
         </div>

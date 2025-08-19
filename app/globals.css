@@ -5,7 +5,8 @@
 :root {
   /* Updated font variable to Comic Neue */
   --font-comic-neue: "Comic Neue", cursive;
-  --primary: 25 100% 42%; /* Updated primary color value */
+  /* Updated primary color HSL value to match #f97316 */
+  --primary: 25 95% 53%;
 }
 
 html {
@@ -52,11 +53,13 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d88200; /* Updated color reference */
+  /* Updated scrollbar color to match new primary color */
+  background: #f97316;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #c07600; /* Updated color reference */
+  /* Updated scrollbar hover color to darker shade */
+  background: #ea580c;
 }
 
 @layer base {
@@ -67,7 +70,8 @@ body {
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 25 100% 42%; /* Updated primary color value */
+    /* Updated primary color HSL value to match #f97316 */
+    --primary: 25 95% 53%;
     --primary-foreground: 0 0% 98%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
@@ -103,7 +107,8 @@ body {
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 25 100% 42%; /* Updated primary color value */
+    /* Updated primary color HSL value to match #f97316 */
+    --primary: 25 95% 53%;
     --primary-foreground: 0 0% 9%;
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;

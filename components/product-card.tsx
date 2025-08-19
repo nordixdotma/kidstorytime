@@ -33,7 +33,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       onMouseLeave={handleMouseLeave}
     >
       <div className="absolute top-2 left-0 z-10">
-        <span className="bg-[#d88200] text-white text-xs font-normal px-2 py-1 uppercase tracking-wide rounded-r-sm">
+        <span className="bg-[#f97316] text-white text-xs font-normal px-2 py-1 uppercase tracking-wide rounded-r-sm">
           {getCategoryLabel(product.category)}
         </span>
       </div>
@@ -61,11 +61,8 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         <div className="mt-auto flex justify-start">
           <Link href={`/products/${product.id}`}>
-            <button className="relative bg-[#d88200] text-white py-2 px-4 rounded-sm text-sm font-medium transition-colors duration-300 overflow-hidden group/btn">
-              <span className="relative z-10 transition-colors duration-300 group-hover/btn:text-white">
-                Personnaliser
-              </span>
-              <div className="absolute inset-0 bg-black scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-300 origin-center"></div>
+            <button className="relative bg-[#f97316] text-white py-2 px-4 rounded-full text-sm font-medium transition-all duration-300 overflow-hidden group/btn border-2 border-[#f97316] hover:bg-white hover:text-[#f97316]">
+              <span className="relative z-10 transition-colors duration-300">Personnaliser</span>
             </button>
           </Link>
         </div>
