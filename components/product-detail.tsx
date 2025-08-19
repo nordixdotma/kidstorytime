@@ -3,7 +3,7 @@
 import type { Product } from "@/lib/mock-products"
 import { mockProducts } from "@/lib/mock-products"
 import { AnimatePresence, motion } from "framer-motion"
-import { ArrowLeft, ArrowRight, Truck } from "lucide-react"
+import { ArrowLeft, ArrowRight, Check, Edit, Truck, X } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -21,6 +21,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const [childName, setChildName] = useState("")
   const [selectedDedication, setSelectedDedication] = useState("1")
   const [nameError, setNameError] = useState("")
+  const [isEditingDedication, setIsEditingDedication] = useState(false)
+  const [customDedicationText, setCustomDedicationText] = useState("")
 
   // Get related products (exclude current product)
   const relatedProducts = mockProducts.filter((p) => p.id !== product.id).slice(0, 4)
@@ -73,6 +75,32 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     return dedications[selectedDedication as keyof typeof dedications]
   }
 
+  const getCurrentDedicationText = () => {
+    return customDedicationText || getSelectedDedicText()
+  }
+
+  const handleEditDedication = () => {
+    setCustomDedicationText(getCurrentDedicationText())
+    setIsEditingDedication(true)
+  }
+
+  const handleSaveDedication = () => {
+    localStorage.setItem(`custom-dedication-${product.id}`, customDedicationText)
+    setIsEditingDedication(false)
+  }
+
+  const handleCancelEdit = () => {
+    setCustomDedicationText("")
+    setIsEditingDedication(false)
+  }
+
+  useEffect(() => {
+    const savedDedication = localStorage.getItem(`custom-dedication-${product.id}`)
+    if (savedDedication) {
+      setCustomDedicationText(savedDedication)
+    }
+  }, [product.id])
+
   const handleViewPreview = () => {
     // Validate required fields
     if (!childName.trim()) {
@@ -87,7 +115,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       selectedCategory,
       childName: childName.trim(),
       selectedDedication,
-      dedicationText: getSelectedDedicText(),
+      dedicationText: getCurrentDedicationText(),
     }
 
     localStorage.setItem("product-preview", JSON.stringify(productInfo))
@@ -306,11 +334,51 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 ))}
               </div>
 
-              {/* Display selected dedication */}
-              <div className="p-4 bg-gray-100 rounded-sm">
-                <p className="text-sm sm:text-base text-gray-700 italic">
-                  {getSelectedDedicText().replace(/\[Prénom de l'enfant\]/g, "**[Prénom de l'enfant]**")}
-                </p>
+              <div className="p-4 bg-gray-100 rounded-sm relative">
+                <div className="flex items-start justify-between mb-2">
+                  <h4 className="text-sm font-medium text-gray-700">Aperçu de la dédicace:</h4>
+                  {!isEditingDedication && (
+                    <button
+                      onClick={handleEditDedication}
+                      className="flex items-center text-[#d88200] hover:text-[#c07600] transition-colors"
+                      title="Modifier la dédicace"
+                    >
+                      <Edit size={16} />
+                    </button>
+                  )}
+                </div>
+
+                {isEditingDedication ? (
+                  <div className="space-y-3">
+                    <textarea
+                      value={customDedicationText}
+                      onChange={(e) => setCustomDedicationText(e.target.value)}
+                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#d88200] focus:border-[#d88200] text-sm resize-none"
+                      rows={4}
+                      placeholder="Personnalisez votre dédicace..."
+                    />
+                    <div className="flex gap-2">
+                      <button
+                        onClick={handleSaveDedication}
+                        className="flex items-center gap-1 px-3 py-1 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors text-sm"
+                      >
+                        <Check size={14} />
+                        Sauvegarder
+                      </button>
+                      <button
+                        onClick={handleCancelEdit}
+                        className="flex items-center gap-1 px-3 py-1 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors text-sm"
+                      >
+                        <X size={14} />
+                        Annuler
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-sm sm:text-base text-gray-700 italic">
+                    {getCurrentDedicationText().replace(/\[Prénom de l'enfant\]/g, "**[Prénom de l'enfant]**")}
+                  </p>
+                )}
               </div>
             </div>
 

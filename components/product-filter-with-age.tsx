@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { Search, X, ChevronDown, DollarSign, Calendar, ArrowUpDown } from "lucide-react"
+import { Search, X, ChevronDown, Wallet, Calendar, ArrowUpDown, Tag } from "lucide-react"
 
 interface FilterOptions {
   brands: string[]
@@ -11,6 +11,7 @@ interface FilterOptions {
   }
   ageRange: string
   sortBy: string
+  category: string
 }
 
 interface ProductFilterWithAgeProps {
@@ -21,15 +22,17 @@ interface ProductFilterWithAgeProps {
   filteredCount: number
 }
 
-type FilterType = "price" | "age" | "sort"
+type FilterType = "category" | "price" | "age" | "sort"
 
 interface FilterState {
+  category: string
   price: string
   age: string
   sort: string
 }
 
 interface DropdownState {
+  category: boolean
   price: boolean
   age: boolean
   sort: boolean
@@ -44,30 +47,33 @@ export default function ProductFilterWithAge({
 }: ProductFilterWithAgeProps) {
   const [isLoaded, setIsLoaded] = useState(false)
   const [filters, setFilters] = useState<FilterState>({
+    category: "Toutes les catégories",
     price: "Tous les prix",
     age: "Tous les âges",
     sort: "Plus récent",
   })
 
   const [dropdownOpen, setDropdownOpen] = useState<DropdownState>({
+    category: false,
     price: false,
     age: false,
     sort: false,
   })
 
   const dropdownRefs = {
+    category: useRef<HTMLDivElement>(null),
     price: useRef<HTMLDivElement>(null),
     age: useRef<HTMLDivElement>(null),
     sort: useRef<HTMLDivElement>(null),
   }
 
-  // Check if any filter is applied
-  const hasActiveFilters = filters.price !== "Tous les prix" || filters.age !== "Tous les âges"
+  const hasActiveFilters =
+    filters.category !== "Toutes les catégories" || filters.price !== "Tous les prix" || filters.age !== "Tous les âges"
 
-  // Get age ranges
+  const getCategoryOptions = () => ["Toutes les catégories", "Aventure", "Sommeil", "Éducatif", "Fantaisie"]
+
   const getAgeRanges = () => ["Tous les âges", "0-2 ans", "3-5 ans", "6-8 ans", "9-12 ans", "13+ ans"]
 
-  // Get price ranges
   const getPriceRanges = () => [
     "Tous les prix",
     "Moins de 50 DH",
@@ -78,7 +84,6 @@ export default function ProductFilterWithAge({
     "Plus de 500 DH",
   ]
 
-  // Get sort options
   const getSortOptions = () => ["Plus récent", "Prix: croissant", "Prix: décroissant", "Nom A-Z", "Marque"]
 
   useEffect(() => {
@@ -103,13 +108,13 @@ export default function ProductFilterWithAge({
     }
   }, [])
 
-  // Update filters when they change
   useEffect(() => {
     const filterOptions: FilterOptions = {
       brands: [],
       priceRange: getPriceRangeFromString(filters.price),
       ageRange: filters.age,
       sortBy: getSortValueFromString(filters.sort),
+      category: filters.category,
     }
     onFilterChange(filterOptions)
   }, [filters, onFilterChange])
@@ -165,6 +170,7 @@ export default function ProductFilterWithAge({
 
   const resetFilters = () => {
     setFilters({
+      category: "Toutes les catégories",
       price: "Tous les prix",
       age: "Tous les âges",
       sort: "Plus récent",
@@ -173,6 +179,7 @@ export default function ProductFilterWithAge({
 
   const resetFilter = (type: FilterType) => {
     const defaultValues = {
+      category: "Toutes les catégories",
       price: "Tous les prix",
       age: "Tous les âges",
       sort: "Plus récent",
@@ -186,7 +193,6 @@ export default function ProductFilterWithAge({
         isLoaded ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"
       }`}
     >
-      {/* Search and Reset Filters */}
       <div className="flex gap-2 mb-4 transition-all duration-300 ease-in-out">
         <div className={`relative transition-all duration-500 ease-in-out ${hasActiveFilters ? "w-10/12" : "w-full"}`}>
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -210,28 +216,26 @@ export default function ProductFilterWithAge({
         )}
       </div>
 
-      {/* Filters Grid - 3 columns for desktop, 1 for mobile */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-        {/* Price Filter */}
-        <div className="relative" ref={dropdownRefs.price}>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+        <div className="relative order-2 md:order-1" ref={dropdownRefs.category}>
           <button
-            onClick={() => toggleDropdown("price")}
+            onClick={() => toggleDropdown("category")}
             className={`w-full flex items-center justify-between px-3 py-2 border-2 rounded-lg transition-all duration-200 ${
-              filters.price !== "Tous les prix"
+              filters.category !== "Toutes les catégories"
                 ? "border-[#d88200] bg-[#d88200]/10"
                 : "border-gray-200 hover:border-[#d88200]/30"
             } text-xs focus:outline-none focus:ring-2 focus:ring-[#d88200] focus:border-transparent font-medium`}
           >
             <div className="flex items-center">
-              <DollarSign className="w-3 h-3 mr-1 text-[#d88200]" />
-              <span className="truncate text-xs">{filters.price}</span>
+              <Tag className="w-3 h-3 mr-1 text-[#d88200]" />
+              <span className="truncate text-xs">{filters.category}</span>
             </div>
             <div className="flex items-center">
-              {filters.price !== "Tous les prix" && (
+              {filters.category !== "Toutes les catégories" && (
                 <div
                   onClick={(e) => {
                     e.stopPropagation()
-                    resetFilter("price")
+                    resetFilter("category")
                   }}
                   className="mr-1 text-[#d88200] hover:text-[#c07600] cursor-pointer p-1 rounded-full hover:bg-white transition-colors"
                 >
@@ -239,30 +243,29 @@ export default function ProductFilterWithAge({
                 </div>
               )}
               <ChevronDown
-                className={`w-3 h-3 transition-transform duration-200 ${dropdownOpen.price ? "rotate-180" : ""}`}
+                className={`w-3 h-3 transition-transform duration-200 ${dropdownOpen.category ? "rotate-180" : ""}`}
               />
             </div>
           </button>
 
-          {dropdownOpen.price && (
+          {dropdownOpen.category && (
             <div className="absolute z-50 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden">
-              {getPriceRanges().map((price) => (
+              {getCategoryOptions().map((category) => (
                 <button
-                  key={price}
+                  key={category}
                   className={`w-full text-left px-3 py-2 text-xs hover:bg-gray-50 font-medium transition-colors duration-150 ${
-                    filters.price === price ? "bg-[#d88200]/10 text-[#d88200] font-bold" : "text-gray-700"
+                    filters.category === category ? "bg-[#d88200]/10 text-[#d88200] font-bold" : "text-gray-700"
                   }`}
-                  onClick={() => setFilter("price", price)}
+                  onClick={() => setFilter("category", category)}
                 >
-                  {price}
+                  {category}
                 </button>
               ))}
             </div>
           )}
         </div>
 
-        {/* Age Filter */}
-        <div className="relative" ref={dropdownRefs.age}>
+        <div className="relative order-3 md:order-2" ref={dropdownRefs.age}>
           <button
             onClick={() => toggleDropdown("age")}
             className={`w-full flex items-center justify-between px-3 py-2 border-2 rounded-lg transition-all duration-200 ${
@@ -310,8 +313,7 @@ export default function ProductFilterWithAge({
           )}
         </div>
 
-        {/* Sort Filter */}
-        <div className="relative" ref={dropdownRefs.sort}>
+        <div className="relative order-4 md:order-3" ref={dropdownRefs.sort}>
           <button
             onClick={() => toggleDropdown("sort")}
             className={`w-full flex items-center justify-between px-3 py-2 border-2 rounded-lg transition-all duration-200 ${
@@ -353,6 +355,54 @@ export default function ProductFilterWithAge({
                   onClick={() => setFilter("sort", sort)}
                 >
                   {sort}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="relative order-1 md:order-4" ref={dropdownRefs.price}>
+          <button
+            onClick={() => toggleDropdown("price")}
+            className={`w-full flex items-center justify-between px-3 py-2 border-2 rounded-lg transition-all duration-200 ${
+              filters.price !== "Tous les prix"
+                ? "border-[#d88200] bg-[#d88200]/10"
+                : "border-gray-200 hover:border-[#d88200]/30"
+            } text-xs focus:outline-none focus:ring-2 focus:ring-[#d88200] focus:border-transparent font-medium`}
+          >
+            <div className="flex items-center">
+              <Wallet className="w-3 h-3 mr-1 text-[#d88200]" />
+              <span className="truncate text-xs">{filters.price}</span>
+            </div>
+            <div className="flex items-center">
+              {filters.price !== "Tous les prix" && (
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    resetFilter("price")
+                  }}
+                  className="mr-1 text-[#d88200] hover:text-[#c07600] cursor-pointer p-1 rounded-full hover:bg-white transition-colors"
+                >
+                  <X className="w-3 h-3" />
+                </div>
+              )}
+              <ChevronDown
+                className={`w-3 h-3 transition-transform duration-200 ${dropdownOpen.price ? "rotate-180" : ""}`}
+              />
+            </div>
+          </button>
+
+          {dropdownOpen.price && (
+            <div className="absolute z-50 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden">
+              {getPriceRanges().map((price) => (
+                <button
+                  key={price}
+                  className={`w-full text-left px-3 py-2 text-xs hover:bg-gray-50 font-medium transition-colors duration-150 ${
+                    filters.price === price ? "bg-[#d88200]/10 text-[#d88200] font-bold" : "text-gray-700"
+                  }`}
+                  onClick={() => setFilter("price", price)}
+                >
+                  {price}
                 </button>
               ))}
             </div>
