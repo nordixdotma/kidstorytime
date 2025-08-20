@@ -25,7 +25,7 @@ export default function OpeningAnimation({ onComplete }: OpeningAnimationProps) 
     <div className="fixed inset-0 z-50 flex">
       {/* Left half */}
       <motion.div
-        className="w-1/2 h-full bg-[#d88200]"
+        className="w-1/2 h-full bg-primary"
         initial={{ x: 0 }}
         animate={{ x: "-100%" }}
         transition={{ duration: 1, delay: 1, ease: "easeInOut" }}
@@ -33,7 +33,7 @@ export default function OpeningAnimation({ onComplete }: OpeningAnimationProps) 
 
       {/* Right half */}
       <motion.div
-        className="w-1/2 h-full bg-[#d88200]"
+        className="w-1/2 h-full bg-primary"
         initial={{ x: 0 }}
         animate={{ x: "100%" }}
         transition={{ duration: 1, delay: 1, ease: "easeInOut" }}

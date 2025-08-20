@@ -90,7 +90,7 @@ export default function Footer() {
                 placeholder="Votre email"
                 className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
               />
-              <Button className="w-full bg-[#d88200] hover:bg-[#c07600] text-white">S'abonner</Button>
+              <Button className="w-full bg-primary hover:bg-white text-white hover:text-primary">S'abonner</Button>
             </div>
           </div>
         </div>

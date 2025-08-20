@@ -31,7 +31,7 @@ export default function StoryCategoriesSection() {
   }
 
   return (
-    <section className="py-16 md:py-24 bg-gray-50">
+    <section className="py-8 md:py-12 bg-gray-50">
       <motion.div
         ref={ref}
         variants={containerVariants}
@@ -52,58 +52,40 @@ export default function StoryCategoriesSection() {
 
         <motion.div variants={itemVariants} className="grid md:grid-cols-2 gap-8">
           {/* Histoires Uniques */}
-          <div className="relative overflow-hidden rounded-md bg-gradient-to-br from-blue-400 to-purple-600">
+          <div className="relative overflow-hidden rounded-md aspect-[3/2]">
             <div className="absolute inset-0">
-              <img src="/section.avif" alt="Histoires Uniques" className="w-full h-full object-cover opacity-80" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <img src="/story.avif" alt="Histoires Uniques" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/20"></div>
             </div>
-            <div className="relative z-10 h-96 flex flex-col justify-end p-0">
-              <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-lg mx-auto mb-4 p-4 w-11/12">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2 text-white">Personnaliser sur loisir</h3>
-                    <p className="text-sm text-white/90 leading-relaxed">
-                      Offrez à vos enfants une expérience de lecture inoubliable et personnalisée !
-                    </p>
-                  </div>
-                  <Link href="/boutique">
-                    <button className="w-full sm:w-auto px-4 py-2 bg-[#d88200] text-white font-semibold rounded-lg text-sm whitespace-nowrap relative overflow-hidden group transition-all duration-300 hover:text-white">
-                      <span className="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></span>
-                      <span className="relative z-10">Découvrir</span>
-                    </button>
-                  </Link>
-                </div>
-              </div>
+            <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+              <h3 className="text-xl font-bold mb-2 text-white">Personnaliser sur loisir</h3>
+              <p className="text-sm text-white/90 leading-relaxed mb-4">
+                Offrez à vos enfants une expérience de lecture inoubliable et personnalisée !
+              </p>
+              <Link href="/boutique">
+                <button className="px-6 py-2 border border-primary bg-primary text-white font-semibold rounded-full text-sm transition-all duration-300 hover:bg-transparent hover:text-primary">
+                  Découvrir
+                </button>
+              </Link>
             </div>
           </div>
 
           {/* Personnalisation Facile */}
-          <div className="relative overflow-hidden rounded-md bg-gradient-to-br from-orange-400 to-red-500">
+          <div className="relative overflow-hidden rounded-md aspect-[3/2]">
             <div className="absolute inset-0">
-              <img
-                src="/section.avif"
-                alt="Personnalisation Facile"
-                className="w-full h-full object-cover opacity-80"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <img src="/story1.avif" alt="Personnalisation Facile" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/20"></div>
             </div>
-            <div className="relative z-10 h-96 flex flex-col justify-end p-0">
-              <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-lg mx-auto mb-4 p-4 w-11/12">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2 text-white">Personnalisation Facile</h3>
-                    <p className="text-sm text-white/90 leading-relaxed">
-                      Choisissez une histoire et écrivez le prénom de votre enfant pour une expérience unique !
-                    </p>
-                  </div>
-                  <Link href="/personnalisation">
-                    <button className="w-full sm:w-auto px-4 py-2 bg-[#d88200] text-white font-semibold rounded-lg text-sm whitespace-nowrap relative overflow-hidden group transition-all duration-300 hover:text-white">
-                      <span className="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></span>
-                      <span className="relative z-10">Commencer</span>
-                    </button>
-                  </Link>
-                </div>
-              </div>
+            <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+              <h3 className="text-xl font-bold mb-2 text-white">Personnalisation Facile</h3>
+              <p className="text-sm text-white/90 leading-relaxed mb-4">
+                Choisissez une histoire et écrivez le prénom de votre enfant pour une expérience unique !
+              </p>
+              <Link href="/personnalisation">
+                <button className="px-6 py-2 border border-primary bg-primary text-white font-semibold rounded-full text-sm transition-all duration-300 hover:bg-transparent hover:border hover:text-primary">
+                  Commencer
+                </button>
+              </Link>
             </div>
           </div>
         </motion.div>

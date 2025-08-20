@@ -116,7 +116,7 @@ export default function AboutSection() {
             >
               <Link
                 href="/boutique"
-                className="inline-flex items-center border-2 border-primary text-primary font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:bg-transparent hover:text-primary hover:border-primary transform hover:scale-105"
+                className="inline-flex items-center bg-primary text-white border-2 border-primary hover:text-primary font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:bg-transparent transform hover:scale-105"
               >
                 Découvrez
               </Link>
@@ -134,11 +134,11 @@ export default function AboutSection() {
               <img
                 src="/about.avif"
                 alt="Histoires personnalisées Kidstorytime"
-                className="w-full h-[500px] object-cover rounded-2xl shadow-2xl"
+                className="w-full h-[400px] md:h-[500px] object-cover rounded-2xl shadow-2xl"
               />
 
               {/* Stats Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 bg-[#d88200] p-6 rounded-b-2xl">
+              <div className="absolute bottom-0 left-0 right-0 bg-primary p-6 rounded-b-2xl">
                 <div className="grid grid-cols-2 gap-8 text-center">
                   <div>
                     <div className="mb-2">
