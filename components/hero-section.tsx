@@ -54,7 +54,7 @@ export default function HeroSection() {
           <div className="max-w-5xl text-center mx-auto">
             <SplitText
               text="Histoires Personnalisées pour Enfant"
-              className="text-3xl md:text-5xl lg:text-6xl font-medium text-white leading-tight mb-6"
+              className="text-3xl md:text-5xl lg:text-6xl font-medium text-white leading-tight mb-1"
               splitType="words"
               delay={150}
               duration={0.8}

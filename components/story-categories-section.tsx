@@ -63,7 +63,7 @@ export default function StoryCategoriesSection() {
                 Offrez à vos enfants une expérience de lecture inoubliable et personnalisée !
               </p>
               <Link href="/boutique">
-                <button className="px-6 py-2 border border-primary bg-primary text-white font-semibold rounded-full text-sm transition-all duration-300 hover:bg-transparent hover:text-primary">
+                <button className="px-6 py-3 border border-primary bg-primary text-white font-semibold rounded-full text-sm transition-all duration-300 hover:bg-transparent hover:text-primary">
                   Découvrir
                 </button>
               </Link>
@@ -82,7 +82,7 @@ export default function StoryCategoriesSection() {
                 Choisissez une histoire et écrivez le prénom de votre enfant pour une expérience unique !
               </p>
               <Link href="/personnalisation">
-                <button className="px-6 py-2 border border-primary bg-primary text-white font-semibold rounded-full text-sm transition-all duration-300 hover:bg-transparent hover:border hover:text-primary">
+                <button className="px-6 py-3 border border-primary bg-primary text-white font-semibold rounded-full text-sm transition-all duration-300 hover:bg-transparent hover:border hover:text-primary">
                   Commencer
                 </button>
               </Link>

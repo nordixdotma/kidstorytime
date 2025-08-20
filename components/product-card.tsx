@@ -38,23 +38,40 @@ export default function ProductCard({ product }: ProductCardProps) {
         </span>
       </div>
 
-      <div className="relative aspect-square overflow-hidden">
-        {/* Main image */}
-        <img
-          src={product.images[0] || "/placeholder.svg"}
-          alt={product.name}
-          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
-          style={{ opacity: isHovered && product.images.length > 1 ? 0 : 1 }}
-        />
-        {/* Secondary image for hover effect */}
-        {product.images.length > 1 && (
-          <img
-            src={product.images[1] || "/placeholder.svg"}
-            alt={product.name}
-            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
-            style={{ opacity: isHovered ? 1 : 0 }}
-          />
-        )}
+      <div className="relative aspect-square overflow-hidden" style={{ perspective: "1000px" }}>
+        <div
+          className="relative w-full h-full transition-transform duration-700 ease-in-out"
+          style={{
+            transformStyle: "preserve-3d",
+            transform: isHovered && product.images.length > 1 ? "rotateY(180deg)" : "rotateY(0deg)",
+          }}
+        >
+          {/* Front page (main image) */}
+          <div className="absolute inset-0 w-full h-full backface-hidden" style={{ backfaceVisibility: "hidden" }}>
+            <img
+              src={product.images[0] || "/placeholder.svg"}
+              alt={product.name}
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Back page (secondary image) */}
+          {product.images.length > 1 && (
+            <div
+              className="absolute inset-0 w-full h-full backface-hidden"
+              style={{
+                backfaceVisibility: "hidden",
+                transform: "rotateY(180deg)",
+              }}
+            >
+              <img
+                src={product.images[1] || "/placeholder.svg"}
+                alt={product.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Content container */}

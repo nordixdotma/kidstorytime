@@ -33,7 +33,7 @@ export default function StoryCategoriesInfoSection() {
           <div className="relative overflow-hidden h-full min-h-[300px] lg:min-h-[400px] lg:col-span-1">
             <div className="w-3/5 h-full mx-auto">
               <img
-                src="/section.avif"
+                src="/storyinfo.avif"
                 alt="Famille avec livre personnalisé"
                 className="w-full h-full object-cover rounded-lg"
               />
