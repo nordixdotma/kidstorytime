@@ -70,7 +70,40 @@ export default function ProductFilterWithAge({
   const hasActiveFilters =
     filters.category !== "Toutes les catégories" || filters.price !== "Tous les prix" || filters.age !== "Tous les âges"
 
-  const getCategoryOptions = () => ["Toutes les catégories", "Aventure", "Sommeil", "Éducatif", "Fantaisie"]
+  const getCategoryOptions = () => [
+    "Toutes les catégories",
+    "Hiver",
+    "Été",
+    "Printemps",
+    "Automne",
+    "Aventures",
+    "Famille",
+    "Sommeil",
+    "Propreté",
+    "Ramadan Kareem",
+    "Aïd al-Fitr",
+    "Aïd al-Adha",
+    "Nouveau-né (Garçon)",
+    "Nouveau-né (Fille)",
+    "Anniversaire",
+    "École",
+    "Amitié",
+    "Voyage",
+    "Jeux & Loisirs",
+    "Nature & Animaux",
+    "Sport",
+    "Santé & Bien-être",
+    "Cuisine & Nourriture",
+    "Fêtes (Noël, Nouvel An, etc.)",
+    "Technologie",
+    "Travail & Carrière",
+    "Rêves & Imagination",
+    "Courage & Motivation",
+    "Environnement & Propreté",
+    "Héros & Héroïnes",
+    "Culture & Traditions",
+    "Musique & Danse",
+  ]
 
   const getAgeRanges = () => ["Tous les âges", "0-2 ans", "3-5 ans", "6-8 ans", "9-12 ans", "13+ ans"]
 
@@ -110,7 +143,7 @@ export default function ProductFilterWithAge({
 
   useEffect(() => {
     const filterOptions: FilterOptions = {
-      brands: [],
+      brands: filters.category !== "Toutes les catégories" ? [filters.category] : [],
       priceRange: getPriceRangeFromString(filters.price),
       ageRange: filters.age,
       sortBy: getSortValueFromString(filters.sort),
@@ -249,7 +282,7 @@ export default function ProductFilterWithAge({
           </button>
 
           {dropdownOpen.category && (
-            <div className="absolute z-50 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden">
+            <div className="absolute z-50 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden max-h-60 overflow-y-auto">
               {getCategoryOptions().map((category) => (
                 <button
                   key={category}
@@ -297,7 +330,7 @@ export default function ProductFilterWithAge({
           </button>
 
           {dropdownOpen.age && (
-            <div className="absolute z-50 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden">
+            <div className="absolute z-50 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden max-h-60 overflow-y-auto">
               {getAgeRanges().map((age) => (
                 <button
                   key={age}
@@ -345,7 +378,7 @@ export default function ProductFilterWithAge({
           </button>
 
           {dropdownOpen.sort && (
-            <div className="absolute z-50 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden">
+            <div className="absolute z-50 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden max-h-60 overflow-y-auto">
               {getSortOptions().map((sort) => (
                 <button
                   key={sort}
@@ -393,7 +426,7 @@ export default function ProductFilterWithAge({
           </button>
 
           {dropdownOpen.price && (
-            <div className="absolute z-50 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden">
+            <div className="absolute z-50 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden max-h-60 overflow-y-auto">
               {getPriceRanges().map((price) => (
                 <button
                   key={price}

@@ -50,6 +50,12 @@ export default function PersonnalisationPage() {
       title: "Appréciez la lecture de l'histoire personnalisée avec votre enfant",
       description: "Recevez vos histoires imprimées directement chez vous avec paiement à la livraison.",
     },
+    {
+      number: "5",
+      title: "Personnaliser sur loisir",
+      description:
+        "Adaptez l'histoire selon les loisirs et passions de votre enfant pour une expérience encore plus personnalisée et engageante.",
+    },
   ]
 
   const handleNavigateToBoutique = () => {
@@ -156,7 +162,7 @@ export default function PersonnalisationPage() {
             </div>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between text-center md:text-left">
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">Personnage Unique</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Personnaliser sur loisir</h3>
                 <p className="text-gray-600 mb-6 md:mb-0">Choisissez le héros ou l'héroïne de votre histoire</p>
               </div>
               <button

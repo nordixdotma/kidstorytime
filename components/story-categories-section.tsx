@@ -61,7 +61,7 @@ export default function StoryCategoriesSection() {
               <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-lg mx-auto mb-4 p-4 w-11/12">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2 text-white">Histoires Uniques</h3>
+                    <h3 className="text-xl font-bold mb-2 text-white">Personnaliser sur loisir</h3>
                     <p className="text-sm text-white/90 leading-relaxed">
                       Offrez à vos enfants une expérience de lecture inoubliable et personnalisée !
                     </p>

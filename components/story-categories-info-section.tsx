@@ -21,7 +21,7 @@ export default function StoryCategoriesInfoSection() {
   }
 
   return (
-    <section className="py-8 md:py-12 bg-[#ffebcc]">
+    <section className="py-8 md:py-12 bg-[#ffdd83]">
       <motion.div
         ref={ref}
         initial="hidden"
@@ -49,8 +49,7 @@ export default function StoryCategoriesInfoSection() {
               en famille des histoires douces pour accompagner les grands moments de la vie.
             </p>
             <Link href="/boutique">
-              <button className="px-8 py-4 bg-[#d88200] hover:bg-[#c07600] text-white font-semibold rounded-full transition-all duration-300 text-lg self-start relative overflow-hidden group hover:text-white">
-                <span className="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></span>
+              <button className="px-8 py-4 bg-primary text-white font-semibold rounded-full transition-all duration-300 text-lg self-start relative overflow-hidden group border-2 border-primary hover:bg-transparent hover:text-primary">
                 <span className="relative z-10">Explorez les histoires</span>
               </button>
             </Link>

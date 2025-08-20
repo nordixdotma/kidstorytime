@@ -38,12 +38,23 @@ export default function ProductCard({ product }: ProductCardProps) {
         </span>
       </div>
 
-      <div className="relative h-32 sm:h-40 md:h-48 lg:h-56 overflow-hidden">
+      <div className="relative aspect-square overflow-hidden">
+        {/* Main image */}
         <img
-          src={isHovered && product.images.length > 1 ? product.images[1] : product.images[0] || "/placeholder.svg"}
+          src={product.images[0] || "/placeholder.svg"}
           alt={product.name}
-          className="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
+          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
+          style={{ opacity: isHovered && product.images.length > 1 ? 0 : 1 }}
         />
+        {/* Secondary image for hover effect */}
+        {product.images.length > 1 && (
+          <img
+            src={product.images[1] || "/placeholder.svg"}
+            alt={product.name}
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
+            style={{ opacity: isHovered ? 1 : 0 }}
+          />
+        )}
       </div>
 
       {/* Content container */}

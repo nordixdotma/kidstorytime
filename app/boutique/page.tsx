@@ -19,6 +19,7 @@ interface FilterOptions {
   }
   ageRange: string
   sortBy: string
+  category?: string
 }
 
 export default function BoutiquePage() {
@@ -43,7 +44,10 @@ export default function BoutiquePage() {
       // Age filter
       const matchesAge = filters.ageRange === "Tous les âges" || product.ageRange === filters.ageRange
 
-      return matchesSearch && matchesPrice && matchesAge
+      // Category filter
+      const matchesCategory = !filters.brands.length || filters.brands.includes(product.category)
+
+      return matchesSearch && matchesPrice && matchesAge && matchesCategory
     })
 
     // Sort products
@@ -66,6 +70,12 @@ export default function BoutiquePage() {
   }, [searchTerm, filters])
 
   const handleFilterChange = useCallback((newFilters: FilterOptions) => {
+    // Map category filter to brands array for compatibility
+    if (newFilters.category && newFilters.category !== "Toutes les catégories") {
+      newFilters.brands = [newFilters.category]
+    } else {
+      newFilters.brands = []
+    }
     setFilters(newFilters)
   }, [])
 

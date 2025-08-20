@@ -16,23 +16,27 @@ export default function InstagramSection() {
   const instagramPosts = [
     {
       id: 1,
-      image: "/placeholder.svg?height=300&width=300",
+      image: "/in1.jpg",
       alt: "Enfant lisant une histoire personnalisée",
+      link: "https://www.instagram.com/p/DNfzUtUMLMn/?img_index=1",
     },
     {
       id: 2,
-      image: "/placeholder.svg?height=300&width=300",
+      image: "/in2.jpg",
       alt: "Livre personnalisé avec prénom d'enfant",
+      link: "https://www.instagram.com/p/DNcpUW8M4oy/",
     },
     {
       id: 3,
-      image: "/placeholder.svg?height=300&width=300",
+      image: "/in3.jpg",
       alt: "Famille heureuse lisant ensemble",
+      link: "https://www.instagram.com/p/DNbJFDws1bV/",
     },
     {
       id: 4,
-      image: "/placeholder.svg?height=300&width=300",
+      image: "/in4.jpg",
       alt: "Collection de livres d'histoires colorés",
+      link: "https://www.instagram.com/p/DNOFbQMso3j/",
     },
   ]
 
@@ -54,9 +58,12 @@ export default function InstagramSection() {
           }`}
         >
           {instagramPosts.map((post, index) => (
-            <div
+            <a
               key={post.id}
-              className={`group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 transform hover:scale-105 ${
+              href={post.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 transform hover:scale-105 block ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
               style={{ transitionDelay: `${index * 100 + 500}ms` }}
@@ -70,7 +77,7 @@ export default function InstagramSection() {
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center"></div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>

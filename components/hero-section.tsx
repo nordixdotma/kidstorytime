@@ -64,12 +64,9 @@ export default function HeroSection() {
             </p>
             <Link
               href="/boutique"
-              className="relative inline-block bg-[#d88200] text-white font-medium px-8 py-4 text-lg transition-all duration-300 rounded-full transform hover:scale-105 overflow-hidden group"
+              className="relative inline-block bg-primary text-white font-medium px-8 py-4 text-lg transition-all duration-300 rounded-full transform hover:scale-105 overflow-hidden group border-2 border-primary hover:bg-transparent hover:text-primary"
             >
-              <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
-                Voir nos histoires
-              </span>
-              <div className="absolute inset-0 bg-black scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center rounded-full"></div>
+              <span className="relative z-10 transition-colors duration-300">Voir nos histoires</span>
             </Link>
           </div>
         </div>

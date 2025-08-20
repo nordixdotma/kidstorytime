@@ -116,7 +116,7 @@ export default function AboutSection() {
             >
               <Link
                 href="/boutique"
-                className="inline-flex items-center border-2 border-gray-900 text-gray-900 font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:bg-gray-900 hover:text-white transform hover:scale-105"
+                className="inline-flex items-center border-2 border-primary text-primary font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:bg-transparent hover:text-primary hover:border-primary transform hover:scale-105"
               >
                 Découvrez
               </Link>
