@@ -31,7 +31,7 @@ export default function TestimonialsSection() {
       quote:
         "Ces histoires personnalisées ont complètement transformé notre routine du coucher. Mes jumeaux Salma et Karim adorent entendre leurs aventures ensemble comme explorateurs de l'espace et détectives sous-marines ! C'est vraiment magique de voir leurs visages s'illuminer.",
       image:
-        "https://plus.unsplash.com/premium_photo-1690294614341-cf346ba0a637?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D",
+        "https://i.pinimg.com/736x/18/b1/1c/18b11c18f698cf8b280a0d3a0b56a795.jpg",
       name: "Fatima Zahra",
       position: "Maman de jumeaux",
       rating: 5,
@@ -39,7 +39,7 @@ export default function TestimonialsSection() {
     {
       quote:
         "Service incroyable ! Les histoires sont magnifiquement écrites et ma fille Amina se voit comme le personnage principal. Cela a énormément renforcé sa confiance.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      image: "https://i.pinimg.com/1200x/84/52/f0/8452f0a534deac85bc57caaedc9aa6b0.jpg",
       name: "Rachid Tazi",
       position: "Papa fier",
       rating: 5,
@@ -48,7 +48,7 @@ export default function TestimonialsSection() {
       quote:
         "Kids Story Time crée de la magie pure ! Le visage de mon fils Mehdi s'illumine quand il entend son nom dans les histoires.",
       image:
-        "https://images.unsplash.com/photo-1719844319025-0c144c741041?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D",
+        "https://i.pinimg.com/736x/3e/56/31/3e563116393b0b0d30cacbe9b2b7ebd1.jpg",
       name: "Khadija Idrissi",
       position: "Cliente satisfaite",
       rating: 5,
@@ -57,7 +57,7 @@ export default function TestimonialsSection() {
       quote:
         "Service professionnel avec des résultats touchants. L'équipe prend le temps de comprendre les intérêts de chaque enfant. Les histoires d'aventure de dinosaures de ma fille Yasmine sont ses préférées ! Je recommande vivement ce service unique.",
       image:
-        "https://images.unsplash.com/photo-1629172015687-c446c28cb858?q=80&w=690&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D",
+        "https://i.pinimg.com/736x/7f/f6/35/7ff63599c11d08b3ce2f4c96f6353141.jpg",
       name: "Hassan Benjelloun",
       position: "Client régulier",
       rating: 5,
@@ -65,11 +65,11 @@ export default function TestimonialsSection() {
   ]
 
   return (
-    <section id="testimonials" className="py-16 sm:py-24 relative overflow-hidden bg-white">
+    <section id="testimonials" className="py-12 relative overflow-hidden bg-white">
       <div className="max-w-7xl mx-auto px-1 sm:px-2 md:px-4 relative z-10 overflow-hidden">
-        <div className="text-left mb-16">
+        <div className="text-left mb-6">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl md:text-5xl mb-4">
-            Ce que disent les <span className="text-[#d88200]">parents</span>
+            Ce que disent les <span className="text-primary">parents</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl">
             Découvrez pourquoi les familles adorent nos histoires personnalisées

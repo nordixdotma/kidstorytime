@@ -105,8 +105,8 @@ export default function Contact() {
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
         <motion.div variants={itemVariants} className="text-center mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#d88200] mb-3">Contactez-Nous</h2>
-          <div className="w-16 sm:w-24 h-1 bg-[#d88200] mx-auto mb-4"></div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-primary mb-3">Contactez-Nous</h2>
+          <div className="w-16 sm:w-24 h-1 bg-primary mx-auto mb-4"></div>
           <p className="text-sm sm:text-base text-gray-600 max-w-3xl mx-auto font-normal">
             Intéressé par nos lunettes ou vous avez des questions? Nous serions ravis de vous entendre.
           </p>
@@ -114,10 +114,10 @@ export default function Contact() {
 
         <div className="grid md:grid-cols-2 gap-8">
           <motion.div variants={itemVariants} className="space-y-6">
-            <h3 className="text-xl sm:text-2xl font-black text-[#d88200] mb-4">Informations de Contact</h3>
+            <h3 className="text-xl sm:text-2xl font-black text-primary mb-4">Informations de Contact</h3>
 
             <div className="flex items-start space-x-3">
-              <MapPin className="w-5 h-5 text-[#d88200] mt-0.5" />
+              <MapPin className="w-5 h-5 text-primary mt-0.5" />
               <div>
                 <h4 className="text-sm sm:text-base font-black text-gray-900">Adresse</h4>
                 <p className="text-xs sm:text-sm text-gray-600 mt-1 font-normal">Service en ligne disponible partout</p>
@@ -125,13 +125,13 @@ export default function Contact() {
             </div>
 
             <div className="flex items-start space-x-3">
-              <Phone className="w-5 h-5 text-[#d88200] mt-0.5" />
+              <Phone className="w-5 h-5 text-primary mt-0.5" />
               <div>
                 <h4 className="text-sm sm:text-base font-black text-gray-900">Téléphone</h4>
                 <div className="space-y-1">
                   <a
                     href="tel:+212600986488"
-                    className="text-xs sm:text-sm text-gray-600 hover:text-[#d88200] transition-colors block font-normal"
+                    className="text-xs sm:text-sm text-gray-600 hover:text-primary transition-colors block font-normal"
                     aria-label="Appeler 06 00 98 64 88"
                   >
                     06 00 98 64 88
@@ -141,12 +141,12 @@ export default function Contact() {
             </div>
 
             <div className="flex items-start space-x-3">
-              <Mail className="w-5 h-5 text-[#d88200] mt-0.5" />
+              <Mail className="w-5 h-5 text-primary mt-0.5" />
               <div>
                 <h4 className="text-sm sm:text-base font-black text-gray-900">Email</h4>
                 <a
                   href="mailto:contact@kidstorytime.shop"
-                  className="text-xs sm:text-sm text-gray-600 mt-1 hover:text-[#d88200] transition-colors block font-normal"
+                  className="text-xs sm:text-sm text-gray-600 mt-1 hover:text-primary transition-colors block font-normal"
                   aria-label="Envoyer un email à contact@kidstorytime.shop"
                 >
                   contact@kidstorytime.shop
@@ -155,14 +155,14 @@ export default function Contact() {
             </div>
 
             <div className="flex items-start space-x-3">
-              <Instagram className="w-5 h-5 text-[#d88200] mt-0.5" />
+              <Instagram className="w-5 h-5 text-primary mt-0.5" />
               <div>
                 <h4 className="text-sm sm:text-base font-black text-gray-900">Instagram</h4>
                 <a
                   href="https://www.instagram.com/kids_storytime_24/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs sm:text-sm text-gray-600 mt-1 hover:text-[#d88200] transition-colors block font-normal"
+                  className="text-xs sm:text-sm text-gray-600 mt-1 hover:text-primary transition-colors block font-normal"
                   aria-label="Visitez notre profil Instagram @kidsstorytime"
                 >
                   @kids_storytime_24
@@ -194,7 +194,7 @@ export default function Contact() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 focus:ring-[#d88200] focus:border-[#d88200] outline-none transition font-normal"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 focus:ring-primary focus:border-primary outline-none transition font-normal"
                     placeholder="Votre nom"
                     required
                   />
@@ -209,7 +209,7 @@ export default function Contact() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 focus:ring-[#d88200] focus:border-[#d88200] outline-none transition font-normal"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 focus:ring-primary focus:border-primary outline-none transition font-normal"
                     placeholder="Votre email"
                     required
                   />
@@ -226,7 +226,7 @@ export default function Contact() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 text-sm border border-gray-300 focus:ring-[#d88200] focus:border-[#d88200] outline-none transition font-normal"
+                  className="w-full px-3 py-2 text-sm border border-gray-300 focus:ring-primary focus:border-primary outline-none transition font-normal"
                   placeholder="Votre numéro de téléphone"
                 />
               </div>
@@ -241,7 +241,7 @@ export default function Contact() {
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 text-sm border border-gray-300 focus:ring-[#d88200] focus:border-[#d88200] outline-none transition font-normal"
+                  className="w-full px-3 py-2 text-sm border border-gray-300 focus:ring-primary focus:border-primary outline-none transition font-normal"
                   placeholder="Sujet de votre message"
                 />
               </div>
@@ -256,7 +256,7 @@ export default function Contact() {
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 text-sm border border-gray-300 focus:ring-[#d88200] focus:border-[#d88200] outline-none transition font-normal"
+                  className="w-full px-3 py-2 text-sm border border-gray-300 focus:ring-primary focus:border-primary outline-none transition font-normal"
                   placeholder="Votre message"
                   required
                 ></textarea>
@@ -267,7 +267,7 @@ export default function Contact() {
                 whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-4 py-2 sm:px-6 sm:py-3 bg-[#d88200] text-white text-sm font-black hover:bg-[#c07600] transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
+                className="w-full px-4 py-2 sm:px-6 sm:py-3 bg-primary text-white text-sm font-black hover:bg-[#c07600] transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
               >
                 {isSubmitting ? (
                   <>

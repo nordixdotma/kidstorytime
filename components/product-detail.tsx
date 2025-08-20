@@ -151,7 +151,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         {/* Back Button */}
         <Link
           href="/boutique"
-          className="inline-flex items-center text-[#d88200] hover:text-[#c07600] mb-8 font-medium"
+          className="inline-flex items-center text-primary hover:text-[#c07600] mb-8 font-medium"
         >
           <ArrowLeft size={20} className="mr-2" />
           Retour aux histoires
@@ -170,7 +170,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                     className="absolute left-4 top-1/2 z-10 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md hover:bg-white transition-colors duration-200"
                     aria-label="Image précédente"
                   >
-                    <ArrowLeft size={18} className="text-[#d88200]" />
+                    <ArrowLeft size={18} className="text-primary" />
                   </button>
 
                   <button
@@ -178,7 +178,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                     className="absolute right-4 top-1/2 z-10 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md hover:bg-white transition-colors duration-200"
                     aria-label="Image suivante"
                   >
-                    <ArrowRight size={18} className="text-[#d88200]" />
+                    <ArrowRight size={18} className="text-primary" />
                   </button>
                 </>
               )}
@@ -203,7 +203,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
               {/* Image Counter */}
               {product.images.length > 1 && (
-                <div className="absolute bottom-4 right-4 bg-white/80 px-3 py-1 rounded-full text-xs font-medium text-[#d88200]">
+                <div className="absolute bottom-4 right-4 bg-white/80 px-3 py-1 rounded-full text-xs font-medium text-primary">
                   {selectedImage + 1} / {product.images.length}
                 </div>
               )}
@@ -220,8 +220,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                     onClick={() => handleThumbnailClick(index)}
                     className={`relative overflow-hidden rounded-lg ${
                       selectedImage === index
-                        ? "ring-2 ring-[#d88200] ring-offset-2"
-                        : "ring-1 ring-gray-200 hover:ring-[#d88200]/50"
+                        ? "ring-2 ring-primary ring-offset-2"
+                        : "ring-1 ring-gray-200 hover:ring-primary/50"
                     } w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 transition-all duration-200 flex-shrink-0`}
                   >
                     <img
@@ -244,7 +244,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-[#d88200] mb-2">
+                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-primary mb-2">
                   {product.name}
                 </h1>
 
@@ -256,7 +256,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 {/* Pricing */}
                 <div className="mb-2">
                   <p className="text-base sm:text-lg text-gray-400 line-through font-normal">{product.oldPrice} DH</p>
-                  <p className="text-xl sm:text-2xl md:text-3xl font-black text-[#d88200]">{product.price} DH</p>
+                  <p className="text-xl sm:text-2xl md:text-3xl font-black text-primary">{product.price} DH</p>
                   <p className="text-xs sm:text-sm text-green-600 font-normal">
                     Économisez {product.oldPrice - product.price} DH
                   </p>
@@ -266,14 +266,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
             {/* Genre Selection */}
             <div>
-              <h3 className="text-base sm:text-lg font-black text-[#d88200] mb-3">Genre</h3>
+              <h3 className="text-base sm:text-lg font-black text-primary mb-3">Genre</h3>
               <div className="flex gap-3">
                 <div
                   onClick={() => setSelectedCategory("fille")}
                   className={`cursor-pointer px-4 py-2 border-2 rounded-md transition-all duration-200 ${
                     selectedCategory === "fille"
-                      ? "border-[#d88200] bg-[#d88200]/10 text-[#d88200]"
-                      : "border-gray-300 hover:border-[#d88200]/50 text-gray-700"
+                      ? "border-primary bg-primary/10 text-primary"
+                      : "border-gray-300 hover:border-primary/50 text-gray-700"
                   }`}
                 >
                   <span className="font-medium">Fille</span>
@@ -283,8 +283,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   onClick={() => setSelectedCategory("garcon")}
                   className={`cursor-pointer px-4 py-2 border-2 rounded-md transition-all duration-200 ${
                     selectedCategory === "garcon"
-                      ? "border-[#d88200] bg-[#d88200]/10 text-[#d88200]"
-                      : "border-gray-300 hover:border-[#d88200]/50 text-gray-700"
+                      ? "border-primary bg-primary/10 text-primary"
+                      : "border-gray-300 hover:border-primary/50 text-gray-700"
                   }`}
                 >
                   <span className="font-medium">Garçon</span>
@@ -294,7 +294,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
             {/* Child Name Input */}
             <div>
-              <h3 className="text-base sm:text-lg font-black text-[#d88200] mb-3">
+              <h3 className="text-base sm:text-lg font-black text-primary mb-3">
                 Prénom de l'enfant <span className="text-red-500">*</span>
               </h3>
               <input
@@ -308,7 +308,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 className={`w-full p-3 border rounded-md focus:outline-none focus:ring-1 font-normal transition-colors ${
                   nameError
                     ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-                    : "border-gray-300 focus:ring-[#d88200] focus:border-[#d88200]"
+                    : "border-gray-300 focus:ring-primary focus:border-primary"
                 }`}
                 required
               />
@@ -317,7 +317,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
             {/* Dedication Selection - Checkbox Style */}
             <div>
-              <h3 className="text-base sm:text-lg font-black text-[#d88200] mb-3">Dédicace personnalisée</h3>
+              <h3 className="text-base sm:text-lg font-black text-primary mb-3">Dédicace personnalisée</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
                 {dedicationOptions.map((option) => (
                   <div
@@ -325,8 +325,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                     onClick={() => setSelectedDedication(option.value)}
                     className={`cursor-pointer px-3 py-2 border-2 rounded-md transition-all duration-200 text-center ${
                       selectedDedication === option.value
-                        ? "border-[#d88200] bg-[#d88200]/10 text-[#d88200]"
-                        : "border-gray-300 hover:border-[#d88200]/50 text-gray-700"
+                        ? "border-primary bg-primary/10 text-primary"
+                        : "border-gray-300 hover:border-primary/50 text-gray-700"
                     }`}
                   >
                     <span className="font-medium text-sm">{option.label}</span>
@@ -340,7 +340,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   {!isEditingDedication && (
                     <button
                       onClick={handleEditDedication}
-                      className="flex items-center text-[#d88200] hover:text-[#c07600] transition-colors"
+                      className="flex items-center text-primary hover:text-[#c07600] transition-colors"
                       title="Modifier la dédicace"
                     >
                       <Edit size={16} />
@@ -353,21 +353,21 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                     <textarea
                       value={customDedicationText}
                       onChange={(e) => setCustomDedicationText(e.target.value)}
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#d88200] focus:border-[#d88200] text-sm resize-none"
+                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm resize-none"
                       rows={4}
                       placeholder="Personnalisez votre dédicace..."
                     />
                     <div className="flex gap-2">
                       <button
                         onClick={handleSaveDedication}
-                        className="flex items-center gap-1 px-3 py-1 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors text-sm"
+                        className="flex items-center gap-1 p-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors text-sm"
                       >
                         <Check size={14} />
                         Sauvegarder
                       </button>
                       <button
                         onClick={handleCancelEdit}
-                        className="flex items-center gap-1 px-3 py-1 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors text-sm"
+                        className="flex items-center gap-1 p-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors text-sm"
                       >
                         <X size={14} />
                         Annuler
@@ -384,7 +384,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
             {/* Product Description */}
             <div>
-              <h3 className="text-base sm:text-lg font-black text-[#d88200] mb-3">Description</h3>
+              <h3 className="text-base sm:text-lg font-black text-primary mb-3">Description</h3>
               <p className="text-gray-600 font-normal leading-relaxed">
                 {product.description ||
                   `Découvrez **${product.name}**, une histoire personnalisée qui captivera votre enfant. 
@@ -408,7 +408,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleViewPreview}
-                  className="flex-1 py-3 px-4 bg-[#d88200] text-white rounded-md flex items-center justify-center hover:bg-[#c07600] transition-colors font-black"
+                  className="flex-1 py-3 px-4 bg-primary border-2 border-primary text-white rounded-md flex items-center justify-center hover:bg-white hover:text-primary transition-colors font-black"
                 >
                   Voir l'aperçu
                 </motion.button>
