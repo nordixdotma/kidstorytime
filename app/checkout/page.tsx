@@ -8,26 +8,26 @@ import Link from "next/link"
 import { useState } from "react"
 
 interface CheckoutFormData {
-  nom: string
+  fullName: string
   email: string
-  numero: string
-  adresse: string
-  paye: string
-  ville: string
-  note: string
-  codeReduction: string
+  phone: string
+  city: string
+  country: string
+  address: string
+  comment: string
+  promoCode: string
 }
 
 export default function CheckoutPage() {
   const [formData, setFormData] = useState<CheckoutFormData>({
-    nom: "",
+    fullName: "",
     email: "",
-    numero: "",
-    adresse: "",
-    paye: "",
-    ville: "",
-    note: "",
-    codeReduction: "",
+    phone: "",
+    city: "",
+    country: "",
+    address: "",
+    comment: "",
+    promoCode: "",
   })
 
   const [errors, setErrors] = useState<Partial<CheckoutFormData>>({})
@@ -44,13 +44,13 @@ export default function CheckoutPage() {
   const validateForm = () => {
     const newErrors: Partial<CheckoutFormData> = {}
 
-    if (!formData.nom.trim()) newErrors.nom = "Le nom est obligatoire"
+    if (!formData.fullName.trim()) newErrors.fullName = "Le nom est obligatoire"
     if (!formData.email.trim()) newErrors.email = "L'email est obligatoire"
     else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Format d'email invalide"
-    if (!formData.numero.trim()) newErrors.numero = "Le numéro de téléphone est obligatoire"
-    if (!formData.adresse.trim()) newErrors.adresse = "L'adresse est obligatoire"
-    if (!formData.paye.trim()) newErrors.paye = "Le pays est obligatoire"
-    if (!formData.ville.trim()) newErrors.ville = "La ville est obligatoire"
+    if (!formData.phone.trim()) newErrors.phone = "Le numéro de téléphone est obligatoire"
+    if (!formData.address.trim()) newErrors.address = "L'adresse est obligatoire"
+    if (!formData.country.trim()) newErrors.country = "Le pays est obligatoire"
+    if (!formData.city.trim()) newErrors.city = "La ville est obligatoire"
 
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -75,14 +75,14 @@ export default function CheckoutPage() {
 
       // Reset form
       setFormData({
-        nom: "",
+        fullName: "",
         email: "",
-        numero: "",
-        adresse: "",
-        paye: "",
-        ville: "",
-        note: "",
-        codeReduction: "",
+        phone: "",
+        city: "",
+        country: "",
+        address: "",
+        comment: "",
+        promoCode: "",
       })
     } catch (error) {
       console.error("Error submitting order:", error)
@@ -93,8 +93,8 @@ export default function CheckoutPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50">
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main className="min-h-screen bg-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back Button */}
         <Link
           href="/boutique"
@@ -109,198 +109,227 @@ export default function CheckoutPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <div className="flex items-center justify-center mb-4">
               <ShoppingBag className="text-[#d88200] mr-3" size={32} />
-              <h1 className="text-2xl md:text-3xl font-black text-[#d88200]">Finaliser la commande</h1>
+              <h1 className="text-xl md:text-2xl font-black text-[#d88200]">Finaliser la commande</h1>
             </div>
-            <p className="text-base text-gray-600 max-w-xl mx-auto">
+            <p className="text-sm text-gray-600 max-w-xl mx-auto">
               Remplissez vos informations pour recevoir votre histoire personnalisée
             </p>
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-white rounded-lg p-6 md:p-8 border border-gray-200"
-        >
-          <div className="flex items-center mb-6">
-            <CreditCard className="text-[#d88200] mr-3" size={20} />
-            <h2 className="text-xl font-bold text-gray-900">Informations de livraison</h2>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Nom */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Nom complet <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                value={formData.nom}
-                onChange={(e) => handleInputChange("nom", e.target.value)}
-                className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
-                  errors.nom
-                    ? "border-red-500 focus:ring-red-500"
-                    : "border-gray-300 focus:ring-[#d88200] focus:border-[#d88200]"
-                }`}
-                placeholder="Entrez votre nom complet"
-              />
-              {errors.nom && <p className="text-red-500 text-sm mt-1">{errors.nom}</p>}
-            </div>
-
-            {/* Email */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Email <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="email"
-                value={formData.email}
-                onChange={(e) => handleInputChange("email", e.target.value)}
-                className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
-                  errors.email
-                    ? "border-red-500 focus:ring-red-500"
-                    : "border-gray-300 focus:ring-[#d88200] focus:border-[#d88200]"
-                }`}
-                placeholder="votre@email.com"
-              />
-              {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-            </div>
-
-            {/* Numéro */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Numéro de téléphone <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="tel"
-                value={formData.numero}
-                onChange={(e) => handleInputChange("numero", e.target.value)}
-                className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
-                  errors.numero
-                    ? "border-red-500 focus:ring-red-500"
-                    : "border-gray-300 focus:ring-[#d88200] focus:border-[#d88200]"
-                }`}
-                placeholder="+212 6XX XXX XXX"
-              />
-              {errors.numero && <p className="text-red-500 text-sm mt-1">{errors.numero}</p>}
-            </div>
-
-            {/* Adresse */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Adresse <span className="text-red-500">*</span>
-              </label>
-              <textarea
-                value={formData.adresse}
-                onChange={(e) => handleInputChange("adresse", e.target.value)}
-                rows={2}
-                className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors resize-none ${
-                  errors.adresse
-                    ? "border-red-500 focus:ring-red-500"
-                    : "border-gray-300 focus:ring-[#d88200] focus:border-[#d88200]"
-                }`}
-                placeholder="Entrez votre adresse complète"
-              />
-              {errors.adresse && <p className="text-red-500 text-sm mt-1">{errors.adresse}</p>}
-            </div>
-
-            {/* Pays et Ville */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Pays */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Pays <span className="text-red-500">*</span>
-                </label>
-                <select
-                  value={formData.paye}
-                  onChange={(e) => handleInputChange("paye", e.target.value)}
-                  aria-label="Sélectionnez votre pays"
-                  className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
-                    errors.paye
-                      ? "border-red-500 focus:ring-red-500"
-                      : "border-gray-300 focus:ring-[#d88200] focus:border-[#d88200]"
-                  }`}
-                >
-                  <option value="">Sélectionnez un pays</option>
-                  <option value="Maroc">Maroc</option>
-                  <option value="France">France</option>
-                  <option value="Belgique">Belgique</option>
-                  <option value="Canada">Canada</option>
-                  <option value="Autre">Autre</option>
-                </select>
-                {errors.paye && <p className="text-red-500 text-sm mt-1">{errors.paye}</p>}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {/* Left Column - Order Information (Desktop) */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="order-2 lg:order-1"
+          >
+            <div className="p-4 md:p-6 border border-gray-200 rounded-lg">
+              <div className="flex items-center mb-4">
+                <ShoppingBag className="text-[#d88200] mr-3" size={18} />
+                <h2 className="text-lg font-bold text-gray-900">Résumé de commande</h2>
               </div>
 
-              {/* Ville */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Ville <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={formData.ville}
-                  onChange={(e) => handleInputChange("ville", e.target.value)}
-                  className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
-                    errors.ville
-                      ? "border-red-500 focus:ring-red-500"
-                      : "border-gray-300 focus:ring-[#d88200] focus:border-[#d88200]"
-                  }`}
-                  placeholder="Entrez votre ville"
-                />
-                {errors.ville && <p className="text-red-500 text-sm mt-1">{errors.ville}</p>}
+              {/* Order summary content would go here */}
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Sous-total:</span>
+                  <span className="font-medium">150 DH</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Livraison:</span>
+                  <span className="font-medium">Gratuite</span>
+                </div>
+                <div className="flex justify-between pt-2 border-t font-bold">
+                  <span className="text-gray-900">Total:</span>
+                  <span className="text-[#d88200]">150 DH</span>
+                </div>
               </div>
             </div>
+          </motion.div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                <Tag size={16} className="inline mr-1" />
-                Ajouter un code de réduction
-              </label>
-              <input
-                type="text"
-                value={formData.codeReduction}
-                onChange={(e) => handleInputChange("codeReduction", e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d88200] focus:border-[#d88200] transition-colors"
-                placeholder="Entrez votre code de réduction"
-              />
-            </div>
+          {/* Right Column - Form Inputs (Desktop) */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="order-1 lg:order-2"
+          >
+            <div className="p-4 md:p-6 border border-gray-200 rounded-lg">
+              <div className="flex items-center mb-4">
+                <CreditCard className="text-[#d88200] mr-3" size={18} />
+                <h2 className="text-lg font-bold text-gray-900">Informations de livraison</h2>
+              </div>
 
-            {/* Note */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Note (optionnel)</label>
-              <textarea
-                value={formData.note}
-                onChange={(e) => handleInputChange("note", e.target.value)}
-                rows={3}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d88200] focus:border-[#d88200] transition-colors resize-none"
-                placeholder="Instructions spéciales ou commentaires..."
-              />
-            </div>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Full Name */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Nom complet <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.fullName}
+                    onChange={(e) => handleInputChange("fullName", e.target.value)}
+                    className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
+                      errors.fullName
+                        ? "border-red-500 focus:ring-red-500"
+                        : "border-gray-300 focus:ring-[#d88200] focus:border-[#d88200]"
+                    }`}
+                    placeholder="Votre nom complet"
+                  />
+                  {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>}
+                </div>
 
-            {/* Submit Button */}
-            <div className="pt-4">
-              <motion.button
-                type="submit"
-                disabled={isSubmitting}
-                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                className={`w-full py-3 px-6 rounded-lg font-bold text-white transition-colors ${
-                  isSubmitting ? "bg-gray-400 cursor-not-allowed" : "bg-[#d88200] hover:bg-[#c07600]"
-                }`}
-              >
-                {isSubmitting ? (
-                  <div className="flex items-center justify-center">
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                    Envoi en cours...
+                {/* Email */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Email <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => handleInputChange("email", e.target.value)}
+                    className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
+                      errors.email
+                        ? "border-red-500 focus:ring-red-500"
+                        : "border-gray-300 focus:ring-[#d88200] focus:border-[#d88200]"
+                    }`}
+                    placeholder="votre@email.com"
+                  />
+                  {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                </div>
+
+                {/* Phone */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Téléphone <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => handleInputChange("phone", e.target.value)}
+                    className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
+                      errors.phone
+                        ? "border-red-500 focus:ring-red-500"
+                        : "border-gray-300 focus:ring-[#d88200] focus:border-[#d88200]"
+                    }`}
+                    placeholder="+212 XXXXXXXXX"
+                  />
+                  {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+                </div>
+
+                {/* City and Country */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Ville <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.city}
+                      onChange={(e) => handleInputChange("city", e.target.value)}
+                      className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
+                        errors.city
+                          ? "border-red-500 focus:ring-red-500"
+                          : "border-gray-300 focus:ring-[#d88200] focus:border-[#d88200]"
+                      }`}
+                      placeholder="Votre ville"
+                    />
+                    {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city}</p>}
                   </div>
-                ) : (
-                  "Finaliser la commande"
-                )}
-              </motion.button>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Pays <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.country}
+                      onChange={(e) => handleInputChange("country", e.target.value)}
+                      className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
+                        errors.country
+                          ? "border-red-500 focus:ring-red-500"
+                          : "border-gray-300 focus:ring-[#d88200] focus:border-[#d88200]"
+                      }`}
+                      placeholder="Votre pays"
+                    />
+                    {errors.country && <p className="text-red-500 text-sm mt-1">{errors.country}</p>}
+                  </div>
+                </div>
+
+                {/* Address */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Adresse de livraison <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    value={formData.address}
+                    onChange={(e) => handleInputChange("address", e.target.value)}
+                    rows={2}
+                    className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors resize-none ${
+                      errors.address
+                        ? "border-red-500 focus:ring-red-500"
+                        : "border-gray-300 focus:ring-[#d88200] focus:border-[#d88200]"
+                    }`}
+                    placeholder="Votre adresse complète"
+                  />
+                  {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address}</p>}
+                </div>
+
+                {/* Promo Code */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <Tag size={16} className="inline mr-1" />
+                    Code promo
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.promoCode}
+                    onChange={(e) => handleInputChange("promoCode", e.target.value)}
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d88200] focus:border-[#d88200] transition-colors"
+                    placeholder="Entrez votre code promo"
+                  />
+                </div>
+
+                {/* Comment */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Commentaire</label>
+                  <textarea
+                    value={formData.comment}
+                    onChange={(e) => handleInputChange("comment", e.target.value)}
+                    rows={2}
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d88200] focus:border-[#d88200] transition-colors resize-none"
+                    placeholder="Commentaire ou instructions spéciales (optionnel)"
+                  />
+                </div>
+
+                {/* Submit Button */}
+                <div className="pt-4">
+                  <motion.button
+                    type="submit"
+                    disabled={isSubmitting}
+                    whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                    whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                    className={`w-full py-3 px-6 rounded-lg font-bold text-white transition-colors ${
+                      isSubmitting ? "bg-gray-400 cursor-not-allowed" : "bg-[#d88200] hover:bg-[#c07600]"
+                    }`}
+                  >
+                    {isSubmitting ? (
+                      <div className="flex items-center justify-center">
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                        Envoi en cours...
+                      </div>
+                    ) : (
+                      "Finaliser la commande"
+                    )}
+                  </motion.button>
+                </div>
+              </form>
             </div>
-          </form>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </main>
   )
