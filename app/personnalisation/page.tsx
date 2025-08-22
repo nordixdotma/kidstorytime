@@ -52,7 +52,7 @@ export default function PersonnalisationPage() {
     },
     {
       number: "5",
-      title: "Personnaliser sur loisir",
+      title: "Personnalisation sur mesure",
       description:
         "Adaptez l'histoire selon les loisirs et passions de votre enfant pour une expérience encore plus personnalisée et engageante.",
     },

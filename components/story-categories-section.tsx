@@ -58,7 +58,7 @@ export default function StoryCategoriesSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/20"></div>
             </div>
             <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-              <h3 className="text-xl font-bold mb-2 text-white">Personnaliser sur loisir</h3>
+              <h3 className="text-xl font-bold mb-2 text-white">Personnalisation sur mesure</h3>
               <p className="text-sm text-white/90 leading-relaxed mb-4">
                 Offrez à vos enfants une expérience de lecture inoubliable et personnalisée !
               </p>
