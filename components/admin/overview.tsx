@@ -145,7 +145,7 @@ export function Overview() {
                     <div className="flex-1">
                       <p className="font-medium text-slate-900">{product.name}</p>
                       <div className="flex items-center space-x-2 text-sm text-slate-500">
-                        <Badge variant="secondary">{product.age}+ ans</Badge>
+                        <Badge variant="secondary">{product.ageRange}</Badge>
                         <Badge variant="outline">{product.category}</Badge>
                       </div>
                     </div>

@@ -1,7 +1,9 @@
 "use client"
 
+import type React from "react"
+
 import { motion } from "framer-motion"
-import { ArrowLeft, CreditCard, ShoppingBag } from "lucide-react"
+import { ArrowLeft, CreditCard, ShoppingBag, Tag } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -13,6 +15,7 @@ interface CheckoutFormData {
   paye: string
   ville: string
   note: string
+  codeReduction: string
 }
 
 export default function CheckoutPage() {
@@ -24,16 +27,17 @@ export default function CheckoutPage() {
     paye: "",
     ville: "",
     note: "",
+    codeReduction: "",
   })
 
   const [errors, setErrors] = useState<Partial<CheckoutFormData>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleInputChange = (field: keyof CheckoutFormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }))
+    setFormData((prev) => ({ ...prev, [field]: value }))
     // Clear error when user starts typing
     if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: "" }))
+      setErrors((prev) => ({ ...prev, [field]: "" }))
     }
   }
 
@@ -54,7 +58,7 @@ export default function CheckoutPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!validateForm()) return
 
     setIsSubmitting(true)
@@ -62,13 +66,13 @@ export default function CheckoutPage() {
     try {
       // Here you would normally send the data to your backend
       console.log("Order data:", formData)
-      
+
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+
       // For now, we'll just show an alert
       alert("Commande envoyée avec succès! Nous vous contacterons bientôt.")
-      
+
       // Reset form
       setFormData({
         nom: "",
@@ -78,6 +82,7 @@ export default function CheckoutPage() {
         paye: "",
         ville: "",
         note: "",
+        codeReduction: "",
       })
     } catch (error) {
       console.error("Error submitting order:", error)
@@ -89,7 +94,7 @@ export default function CheckoutPage() {
 
   return (
     <main className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back Button */}
         <Link
           href="/boutique"
@@ -100,38 +105,33 @@ export default function CheckoutPage() {
         </Link>
 
         {/* Header */}
-        <div className="text-center mb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+        <div className="text-center mb-8">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <div className="flex items-center justify-center mb-4">
               <ShoppingBag className="text-[#d88200] mr-3" size={32} />
-              <h1 className="text-3xl md:text-4xl font-black text-[#d88200]">Finaliser la commande</h1>
+              <h1 className="text-2xl md:text-3xl font-black text-[#d88200]">Finaliser la commande</h1>
             </div>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base text-gray-600 max-w-xl mx-auto">
               Remplissez vos informations pour recevoir votre histoire personnalisée
             </p>
           </motion.div>
         </div>
 
-        {/* Checkout Form */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-white rounded-2xl p-8 md:p-12 shadow-lg"
+          className="bg-white rounded-lg p-6 md:p-8 border border-gray-200"
         >
-          <div className="flex items-center mb-8">
-            <CreditCard className="text-[#d88200] mr-3" size={24} />
-            <h2 className="text-2xl font-bold text-gray-900">Informations de livraison</h2>
+          <div className="flex items-center mb-6">
+            <CreditCard className="text-[#d88200] mr-3" size={20} />
+            <h2 className="text-xl font-bold text-gray-900">Informations de livraison</h2>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
             {/* Nom */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Nom complet <span className="text-red-500">*</span>
               </label>
               <input
@@ -150,7 +150,7 @@ export default function CheckoutPage() {
 
             {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Email <span className="text-red-500">*</span>
               </label>
               <input
@@ -169,7 +169,7 @@ export default function CheckoutPage() {
 
             {/* Numéro */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Numéro de téléphone <span className="text-red-500">*</span>
               </label>
               <input
@@ -188,13 +188,13 @@ export default function CheckoutPage() {
 
             {/* Adresse */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Adresse <span className="text-red-500">*</span>
               </label>
               <textarea
                 value={formData.adresse}
                 onChange={(e) => handleInputChange("adresse", e.target.value)}
-                rows={3}
+                rows={2}
                 className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors resize-none ${
                   errors.adresse
                     ? "border-red-500 focus:ring-red-500"
@@ -206,15 +206,16 @@ export default function CheckoutPage() {
             </div>
 
             {/* Pays et Ville */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Pays */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Pays <span className="text-red-500">*</span>
                 </label>
                 <select
                   value={formData.paye}
                   onChange={(e) => handleInputChange("paye", e.target.value)}
+                  aria-label="Sélectionnez votre pays"
                   className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
                     errors.paye
                       ? "border-red-500 focus:ring-red-500"
@@ -233,7 +234,7 @@ export default function CheckoutPage() {
 
               {/* Ville */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Ville <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -251,31 +252,41 @@ export default function CheckoutPage() {
               </div>
             </div>
 
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                <Tag size={16} className="inline mr-1" />
+                Ajouter un code de réduction
+              </label>
+              <input
+                type="text"
+                value={formData.codeReduction}
+                onChange={(e) => handleInputChange("codeReduction", e.target.value)}
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d88200] focus:border-[#d88200] transition-colors"
+                placeholder="Entrez votre code de réduction"
+              />
+            </div>
+
             {/* Note */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Note (optionnel)
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Note (optionnel)</label>
               <textarea
                 value={formData.note}
                 onChange={(e) => handleInputChange("note", e.target.value)}
-                rows={4}
+                rows={3}
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d88200] focus:border-[#d88200] transition-colors resize-none"
                 placeholder="Instructions spéciales ou commentaires..."
               />
             </div>
 
             {/* Submit Button */}
-            <div className="pt-6">
+            <div className="pt-4">
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
                 whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                 whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                className={`w-full py-4 px-6 rounded-lg font-bold text-white transition-colors ${
-                  isSubmitting
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-[#d88200] hover:bg-[#c07600]"
+                className={`w-full py-3 px-6 rounded-lg font-bold text-white transition-colors ${
+                  isSubmitting ? "bg-gray-400 cursor-not-allowed" : "bg-[#d88200] hover:bg-[#c07600]"
                 }`}
               >
                 {isSubmitting ? (
@@ -293,4 +304,4 @@ export default function CheckoutPage() {
       </div>
     </main>
   )
-} 
+}

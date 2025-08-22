@@ -95,8 +95,21 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/20 mt-10 pt-6 text-center">
-          <p className="text-sm text-white/60">© {currentYear} Kids Story Time. Tous droits réservés.</p>
+        <div className="border-t border-white/20 mt-10 pt-6">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
+            <p className="text-sm text-white/60">© {currentYear} Kids Story Time. Tous droits réservés.</p>
+            <p className="text-sm text-white/60">
+              Developed & Designed by{" "}
+              <a
+                href="https://nexusdweb.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:text-primary/80 transition-colors"
+              >
+                NexusdWeb
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </footer>

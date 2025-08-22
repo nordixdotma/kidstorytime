@@ -105,6 +105,11 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     // Validate required fields
     if (!childName.trim()) {
       setNameError("Le prénom de l'enfant est obligatoire")
+      const nameInput = document.querySelector('input[placeholder="Entrez le prénom de l\'enfant"]') as HTMLElement
+      if (nameInput) {
+        nameInput.scrollIntoView({ behavior: "smooth", block: "center" })
+        nameInput.focus()
+      }
       return
     }
 
@@ -128,6 +133,11 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     // Validate required fields
     if (!childName.trim()) {
       setNameError("Le prénom de l'enfant est obligatoire")
+      const nameInput = document.querySelector('input[placeholder="Entrez le prénom de l\'enfant"]') as HTMLElement
+      if (nameInput) {
+        nameInput.scrollIntoView({ behavior: "smooth", block: "center" })
+        nameInput.focus()
+      }
       return
     }
 
@@ -136,7 +146,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     message += `*${product.name}*\n`
     message += `Prix: ${product.price} DH\n`
     message += `Catégorie: ${selectedCategory}\n`
-    message += `Âge: ${product.age}\n`
+    message += `Âge: ${product.ageRange}\n`
     message += `Prénom: ${childName.trim()}\n`
     message += `Dédicace: ${selectedDedication}\n`
     message += `\nPouvez-vous me donner plus d'informations?`
@@ -149,10 +159,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     <>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 pb-16 md:pb-24">
         {/* Back Button */}
-        <Link
-          href="/boutique"
-          className="inline-flex items-center text-primary hover:text-[#c07600] mb-8 font-medium"
-        >
+        <Link href="/boutique" className="inline-flex items-center text-primary hover:text-[#c07600] mb-8 font-medium">
           <ArrowLeft size={20} className="mr-2" />
           Retour aux histoires
         </Link>
@@ -250,7 +257,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
                 <div className="mb-3 flex gap-4">
                   <p className="text-gray-600 text-sm sm:text-base">Catégorie: {product.category}</p>
-                  <p className="text-gray-600 text-sm sm:text-base">Âge: {product.age}</p>
+                  <p className="text-gray-600 text-sm sm:text-base">Âge: {product.ageRange}</p>
                 </div>
 
                 {/* Pricing */}
